@@ -53,21 +53,22 @@ var bot = controller.spawn({
 // つーかー的なやつだよ
 //=========================================================
 
-controller.hears(["波動拳"],["direct_message","direct_mention","mention"],function(bot,message) {
-  bot.replyWithTyping(message, '昇竜拳！');
-});
+// controller.hears(["波動拳"],["direct_message","direct_mention","mention"],function(bot,message) {
+//   bot.replyWithTyping(message, '昇竜拳！');
+// });
 
-controller.hears(["昇竜拳"],["direct_message","direct_mention","mention"],function(bot,message) {
-  bot.replyWithTyping(message, '竜巻旋風脚！');
-});
+// controller.hears(["昇竜拳"],["direct_message","direct_mention","mention"],function(bot,message) {
+//   bot.replyWithTyping(message, '竜巻旋風脚！');
+// });
 
-controller.hears(["アレックス フレーム表"],["direct_message","direct_mention","mention"],function(bot,message) {
-  bot.replyWithTyping(message, 'https://docs.google.com/spreadsheets/d/1e8Ott5IfoyXaOcaGQfEW4gxbylA89mF9SB2An2M3gFY/edit#gid=1371017080');
-});
+// controller.hears(["アレックス フレーム表"],["direct_message","direct_mention","mention"],function(bot,message) {
+//   bot.replyWithTyping(message, 'https://docs.google.com/spreadsheets/d/1e8Ott5IfoyXaOcaGQfEW4gxbylA89mF9SB2An2M3gFY/edit#gid=1371017080');
+// });
 
-controller.hears(['付き合って'], 'direct_message,direct_mention,mention,ambient',function(bot,message) {
-  bot.replyWithTyping(message, 'お前の楽しみと俺の楽しみは違うようだ。悪いが付き合ってはやれない。');
-});
+// controller.hears(['付き合って'], 'direct_message,direct_mention,mention,ambient',function(bot,message) {
+//   bot.replyWithTyping(message, 'お前の楽しみと俺の楽しみは違うようだ。悪いが付き合ってはやれない。');
+// });
+
 
 //=========================================================
 // 基本的な受け答え
