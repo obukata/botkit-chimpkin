@@ -18,10 +18,10 @@ controller.spawn({
 });
 
 // say hi
-controller.hears('chimpkin',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+controller.hears('やあ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
     bot.reply(message,'なんだよ');
 });
 
-controller.hears('chimpkin',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+controller.hears('疲れた',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
     bot.reply(message,'このひまわりの種でも食べる？');
 });
