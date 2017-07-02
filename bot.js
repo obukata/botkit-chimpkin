@@ -22,7 +22,13 @@ controller.spawn({
 //=========================================================
 
 controller.hears('チンプキン',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'何か呼んだ？:chipmunk:');
+	var helloTalk = [
+		'はーいー:hand::skin-tone-2:',
+		'何か呼んだ？:chipmunk:',
+		'私がチンプキンですよー:stuck_out_tongue_closed_eyes:',
+	];
+	var selectHelloTalk = helloTalk[Math.floor(Math.random() * helloTalk.length)];
+	bot.reply(message, selectHelloTalk);
 });
 
 controller.hears('疲れた',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
