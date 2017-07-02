@@ -22,21 +22,33 @@ controller.spawn({
 //=========================================================
 
 controller.hears('チンプキン',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	var helloTalk = [
+	var helloTalk01 = [
 		'はーいー:hand::skin-tone-2:',
 		'何か呼んだ？:chipmunk:',
 		'私がチンプキンですよー:stuck_out_tongue_closed_eyes:',
 	];
-	var selectHelloTalk = helloTalk[Math.floor(Math.random() * helloTalk.length)];
-	bot.reply(message, selectHelloTalk);
-});
-
-controller.hears('疲れた',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'ひまわりの種でも食べる？');
+	var selectHelloTalk01 = helloTalk01[Math.floor(Math.random() * helloTalk01.length)];
+	bot.reply(message, selectHelloTalk01);
 });
 
 controller.hears('お腹すいた',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'食べる？これ。');
+	var helloTalk02 = [
+		'食べる？これ！:apple:',
+		'今日は何を食べましょうー:fork_and_knife:',
+		'ご飯ご飯！:yum:',
+	];
+	var selectHelloTalk02 = helloTalk02[Math.floor(Math.random() * helloTalk02.length)];
+	bot.reply(message, selectHelloTalk02);
+});
+
+controller.hears('疲れた',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	var helloTalk03 = [
+		'ひまわりの種でも食べる？',
+		'一休みしましょー:slightly_smiling_face:',
+		'無理しないでね:frowning:',
+	];
+	var selectHelloTalk03 = helloTalk03[Math.floor(Math.random() * helloTalk03.length)];
+	bot.reply(message, selectHelloTalk03);
 });
 
 controller.hears('柏',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
@@ -61,6 +73,14 @@ controller.hears('おやすみ',['direct_message','direct_mention','mention','am
 
 controller.hears('好き',['direct_message','direct_mention','mention'],function(bot,message) {
 	bot.reply(message,'Chimpkinもー:heart_eyes:');
+});
+
+controller.hears('仕事',['direct_message','direct_mention','mention'],function(bot,message) {
+	bot.reply(message,'フレーフレー:crossed_flags:');
+});
+
+controller.hears('お寿司',['direct_message','direct_mention','mention'],function(bot,message) {
+	bot.reply(message,'お寿司！\nお寿司いいな！:sushi:');
 });
 
 
