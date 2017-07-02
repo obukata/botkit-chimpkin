@@ -84,6 +84,24 @@ controller.hears('お寿司',['direct_message','direct_mention','mention'],funct
 });
 
 
+
+//=========================================================
+// chimpkin おみくじ
+//=========================================================
+controller.hears('おみくじ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	var omikujiArray = [
+		'*大吉* いい日になるよいいねー',
+		'*中吉* まぁまぁな日もあるよねー',
+		'*小吉* ちょっとくらいの幸せが心地いいもんだよねー',
+		'*吉* みゆきちが出たら大当たりー！パフパフ♪',
+		'*半吉* みゆきち半人前パワー',
+		'*末吉* みゆきちの末の姿。おばあちゃん。',
+		'*凶* :scream:',
+		];
+	var omikujiResult = omikujiArray[Math.floor(Math.random() * omikujiArray.length)];
+	bot.reply(message, omikujiResult);
+});
+
 //=========================================================
 // chimpkin家計簿
 //=========================================================
