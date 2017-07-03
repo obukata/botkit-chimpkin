@@ -103,6 +103,30 @@ controller.hears('おみくじ',['direct_message','direct_mention','mention','am
 });
 
 //=========================================================
+// chimpkin カウントダウン
+//=========================================================
+controller.hears('カウントダウン(.*)秒前',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	var countDownNum = message.match[1];
+	if(countDownNum <= 0) {
+		bot.reply(message, 'ん？何かおかしくない？:thinking_face:');
+	}else if(countDownNum >= 20) {
+		bot.reply(message, '長くないー？:expressionless:');
+	}else {
+		var countDownTimer = setInterval(function() {
+			if(countDownNum <= 0) {
+				bot.reply(message, ':boom:どかーん！:boom:');
+				clearInterval(countDownTimer);
+			}else {
+				bot.reply(message, countDownNum + '秒前！');
+				countDownNum--;
+			}
+		}, 1000);
+	}
+});
+
+
+
+//=========================================================
 // chimpkin家計簿
 //=========================================================
 
