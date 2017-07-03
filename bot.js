@@ -137,12 +137,17 @@ controller.hears(['家計簿'], 'direct_message,direct_mention,mention,ambient',
 		var costNowDate = costDate.getFullYear() + '/' + costNowDate_M;
 		console.log(costNowDate);
 		controller.storage.users.get(message.user, function(err, getData) {
-			console.log(getData.date.costFood);
-			if (getData.date.costFood) {
-				var tempValue = parseInt(getData.date.costFood) + parseInt(costValue);
-				controller.storage.users.save({id: message.user, date:{data: costNowDate, costFood: tempValue}}, function(err) {
-					bot.reply(message, costValue + '円だね、覚えた！\n```\n今月の支出：' + tempValue + '円\n```');
-				});
+			if(getData) {
+				if (getData.date.costFood) {
+					var tempValue = parseInt(getData.date.costFood) + parseInt(costValue);
+					controller.storage.users.save({id: message.user, date:{data: costNowDate, costFood: tempValue}}, function(err) {
+						bot.reply(message, costValue + '円だね、覚えた！\n```\n今月の支出：' + tempValue + '円\n```');
+					});
+				}else {
+					controller.storage.users.save({id: message.user, date:{data: costNowDate, costFood: costValue}}, function(err) {
+						bot.reply(message, costValue + '円だね、覚えた！\n```\n今月の支出：' + costValue + '円\n```');
+					});
+				};
 			}else {
 				controller.storage.users.save({id: message.user, date:{data: costNowDate, costFood: costValue}}, function(err) {
 					bot.reply(message, costValue + '円だね、覚えた！\n```\n今月の支出：' + costValue + '円\n```');
