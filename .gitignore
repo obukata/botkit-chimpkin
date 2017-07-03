@@ -23,6 +23,7 @@ config.codekit
 *.map
 .sass-cache
 temp
+storage_bot_db
 
 # Node.jsモジュールのディレクトリは無視
 node_modules

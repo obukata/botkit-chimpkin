@@ -6,7 +6,8 @@ if (!process.env.token) {
 }
 
 const controller = Botkit.slackbot({
-	debug: false
+	debug: false,
+	json_file_store: 'storage_bot_db'
 });
 
 controller.spawn({
@@ -17,10 +18,10 @@ controller.spawn({
 	}
 });
 
+
 //=========================================================
 // chimpkin 会話集
 //=========================================================
-
 controller.hears('チンプキン',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	var helloTalk01 = [
 		'はーいー:hand::skin-tone-2:',
@@ -124,47 +125,32 @@ controller.hears('カウントダウン(.*)秒前',['direct_message','direct_men
 	}
 });
 
-
-
 //=========================================================
 // chimpkin家計簿
 //=========================================================
-
-// controller.hears(['ラーメン'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
-// 	// 会話を開始します。
-// 	bot.startConversation(message, function (err, convo) {
-// 		// convo.ask() で質問をします。
-// 		convo.ask('ラーメン食べたの？', [{
-// 		pattern: 'yes',
-// 		callback: function (response, convo) {
-// 			// ▼ マッチした時の処理 ▼
-// 			convo.say('いくらしたの！');
-
-// 			controller.hears(['(.*)円'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
-// 				var value_ramen = message.match[1];
-// 				console.log(value_ramen);
-// 			});
-// 		},
-// 		{
-// 			default: true,
-// 			callback: function (response, convo) {
-// 				// ▼ どのパターンにもマッチしない時の処理 ▼
-// 				convo.say('節約だよー');
-// 			}
-// 		}]);
-// 	})
-// });
-
-// controller.hears(['ラーメン'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
-// 	bot.reply(message,'ラーメン食べたの！？');
-// 	convo.ask('ラーメン食べたの？', [{
-// 		pattern: 'yes',
-// 		callback: function(response, convo) {
-// 			// bot.reply(message,'いくらしたの？');
-// 		}
-// 	}]);
-
-// });
+controller.hears(['家計簿'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
+	bot.reply(message, 'おっけー！メモ取るよ！:memo:\nいくら使ったのー？');
+	controller.hears(['(.*)円'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
+		var costValue = message.match[1];
+		var costDate = new Date();
+		var costNowDate_M = parseInt(costDate.getMonth()) + 1;
+		var costNowDate = costDate.getFullYear() + '/' + costNowDate_M;
+		console.log(costNowDate);
+		controller.storage.users.get(message.user, function(err, getData) {
+			console.log(getData.date.costFood);
+			if (getData.date.costFood) {
+				var tempValue = parseInt(getData.date.costFood) + parseInt(costValue);
+				controller.storage.users.save({id: message.user, date:{data: costNowDate, costFood: tempValue}}, function(err) {
+					bot.reply(message, costValue + '円だね、覚えた！\n```\n今月の支出：' + tempValue + '円\n```');
+				});
+			}else {
+				controller.storage.users.save({id: message.user, date:{data: costNowDate, costFood: costValue}}, function(err) {
+					bot.reply(message, costValue + '円だね、覚えた！\n```\n今月の支出：' + costValue + '円\n```');
+				});
+			}
+		});
+	});
+});
 
 
 //=========================================================
