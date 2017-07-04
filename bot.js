@@ -84,7 +84,25 @@ controller.hears('お寿司',['direct_message','direct_mention','mention'],funct
 	bot.reply(message,'お寿司！\nお寿司いいな！:sushi:');
 });
 
+controller.hears('休憩',['direct_message','direct_mention','mention'],function(bot,message) {
+	bot.reply(message,'一休み一休み♪');
+});
 
+controller.hears('先に寝て',['direct_message','direct_mention','mention'],function(bot,message) {
+	bot.reply(message,'え？うん。わかっ…:zzz:');
+});
+
+controller.hears('眠たい',['direct_message','direct_mention','mention'],function(bot,message) {
+	bot.reply(message,'起きて起きて！:clap::skin-tone-2:');
+});
+
+controller.hears('頑張ろ',['direct_message','direct_mention','mention'],function(bot,message) {
+	bot.reply(message,'おー！:fist::skin-tone-2:');
+});
+
+controller.hears('助けて',['direct_message','direct_mention','mention'],function(bot,message) {
+	bot.reply(message,'待ってて！すぐ行くー！:dash::dash:');
+});
 
 //=========================================================
 // chimpkin おみくじ
