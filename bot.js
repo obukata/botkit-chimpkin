@@ -52,6 +52,16 @@ controller.hears('疲れた',['direct_message','direct_mention','mention','ambie
 	bot.reply(message, selectHelloTalk03);
 });
 
+controller.hears(['おはよう','おはよー'], ['direct_message','direct_mention','mention'],function(bot,message) {
+	var helloTalk04 = [
+		'後5分寝かせてー…',
+		'おはようー！:sunny:',
+		'今日の天気はどうでしょー。\n<@ryu> 大阪の天気教えて下さいー。',
+	];
+	var selectHelloTalk04 = helloTalk04[Math.floor(Math.random() * helloTalk04.length)];
+	bot.reply(message, selectHelloTalk04);
+});
+
 controller.hears('柏',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message,'田舎の事？:thinking_face:');
 });
@@ -103,6 +113,11 @@ controller.hears('頑張ろ',['direct_message','direct_mention','mention'],funct
 controller.hears('助けて',['direct_message','direct_mention','mention'],function(bot,message) {
 	bot.reply(message,'待ってて！すぐ行くー！:dash::dash:');
 });
+
+controller.hears('ただいま',['direct_message','direct_mention','mention'],function(bot,message) {
+	bot.reply(message,'おかえりー:raised_hand_with_fingers_splayed::skin-tone-2:');
+});
+
 
 //=========================================================
 // chimpkin おみくじ
