@@ -1,5 +1,6 @@
 const Botkit = require('botkit');
 const http = require('http');
+const request = require('superagent');
 
 if (!process.env.token) {
 	console.log('Error: Specify token in environment');
@@ -205,13 +206,13 @@ function replaceLuck(target) {
 	if(target == 5) {
 		target = "★★★★★";
 	}else if(target == 4) {
-		target = "☆★★★★";
+		target = "★★★★☆";
 	}else if(target == 3) {
-		target = "☆☆★★★";
+		target = "★★★☆☆";
 	}else if(target == 2) {
-		target = "☆☆☆★★";
+		target = "★★☆☆☆";
 	}else if(target == 1) {
-		target = "☆☆☆☆★";
+		target = "★☆☆☆☆";
 	}else if(target == 0) {
 		target = "☆☆☆☆☆";
 	}
@@ -241,7 +242,7 @@ controller.hears('カウントダウン(.*)秒前',['direct_message','direct_men
 });
 
 //=========================================================
-// chimpkin家計簿
+// chimpkin 家計簿
 //=========================================================
 controller.hears(['家計簿'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
 	bot.reply(message, 'おっけー！メモ取るよ！:memo:\nいくら使ったのー？');
@@ -271,6 +272,47 @@ controller.hears(['家計簿'], 'direct_message,direct_mention,mention,ambient',
 		});
 	});
 });
+
+
+//=========================================================
+// chimpkin pedia
+//=========================================================
+var WIKIPEDIA_URL = 'https://ja.wikipedia.org/wiki/';
+
+controller.hears(['(.*)って何'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
+	var word = message.match[1];
+	request
+	.get('https://ja.wikipedia.org/w/api.php')
+	.query({
+		format : 'json',
+		action : 'query',
+		prop   : 'extracts',
+		exintro: '',
+		explaintext: '',
+		titles : word
+	})
+	.end(function (err, res) {
+		var query = res.body.query;
+		if (query && query.pages) {
+			for (var p in query.pages) {
+				var content = query.pages[p].extract;
+				if (content) {
+					// slackで引用スタイルを適用するために`>` をつける
+					content = '> ' + content.replace(/\n/g, '\n> ');
+				}
+				else {
+					content = '見つからなかった';
+				}
+				bot.reply(message, [
+					content,
+					WIKIPEDIA_URL + word
+				].join('\r\n'));
+				return;
+			}
+		}
+	});
+});
+
 
 
 //=========================================================
