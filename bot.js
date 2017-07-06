@@ -157,13 +157,13 @@ controller.hears(['(.*)の運勢'],["direct_message","direct_mention","mention",
 			response.setEncoding('utf8').on('data', (chunk) => {  body += chunk;  });
 			response.on('end', () => {
 				let current = JSON.parse(body);
-				console.log(current['horoscope']['2017/07/6'][auguryNum]);
+				console.log(current['horoscope'][auguryNowDate][auguryNum]);
 				let text =
-				':crown:' + current['horoscope']['2017/07/6'][auguryNum]['rank'] + '位：' + current['horoscope']['2017/07/6'][auguryNum]['sign'] + 'の今日の運勢\n' +
-				current['horoscope']['2017/07/6'][auguryNum]['content'] + '\n' +
-				'> :moneybag:金運　：' + replaceLuck(current['horoscope']['2017/07/6'][auguryNum]['money']) + '\n' +
-				'> :briefcase:仕事運：' + replaceLuck(current['horoscope']['2017/07/6'][auguryNum]['job']) + '\n' +
-				'> :heart:恋愛運：' + replaceLuck(current['horoscope']['2017/07/6'][auguryNum]['love']);
+				':crown:' + current['horoscope'][auguryNowDate][auguryNum]['rank'] + '位：' + current['horoscope'][auguryNowDate][auguryNum]['sign'] + 'の今日の運勢\n' +
+				current['horoscope'][auguryNowDate][auguryNum]['content'] + '\n' +
+				'> :moneybag:金運　：' + replaceLuck(current['horoscope'][auguryNowDate][auguryNum]['money']) + '\n' +
+				'> :briefcase:仕事運：' + replaceLuck(current['horoscope'][auguryNowDate][auguryNum]['job']) + '\n' +
+				'> :heart:恋愛運：' + replaceLuck(current['horoscope'][auguryNowDate][auguryNum]['love']);
 				bot.replyWithTyping(message, text);
 			});
 		});
