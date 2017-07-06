@@ -1,4 +1,5 @@
 const Botkit = require('botkit');
+const http = require('http');
 
 if (!process.env.token) {
 	console.log('Error: Specify token in environment');
@@ -135,6 +136,87 @@ controller.hears('おみくじ',['direct_message','direct_mention','mention','am
 	var omikujiResult = omikujiArray[Math.floor(Math.random() * omikujiArray.length)];
 	bot.reply(message, omikujiResult);
 });
+
+
+//=========================================================
+// chimpkin 星座占い
+//=========================================================
+controller.hears(['(.*)の運勢'],["direct_message","direct_mention","mention"],function(bot,message) {
+	var augurySign = message.match[1];
+	var auguryNum = replaceSign(augurySign);
+	if(auguryNum == "none") {
+		bot.replyWithTyping(message, 'その星座知らない…:droplet:');
+	}else {
+		var auguryDate = new Date();
+		var auguryNowDate_Y = auguryDate.getFullYear();
+		var auguryNowDate_M = parseInt(auguryDate.getMonth()) + 1;
+		var auguryNowDate_D = auguryDate.getDate();
+		var auguryNowDate = auguryNowDate_Y + "/" + auguryNowDate_M + "/" + auguryNowDate_D;
+		http.get("http://api.jugemkey.jp/api/horoscope/free/"+ auguryNowDate_Y + "/" + auguryNowDate_M + "/" + auguryNowDate_D, (response) => {
+			let body = '';
+			response.setEncoding('utf8').on('data', (chunk) => {  body += chunk;  });
+			response.on('end', () => {
+				let current = JSON.parse(body);
+				console.log(current['horoscope']['2017/07/6'][auguryNum]);
+				let text =
+				':crown:' + current['horoscope']['2017/07/6'][auguryNum]['rank'] + '位：' + current['horoscope']['2017/07/6'][auguryNum]['sign'] + 'の今日の運勢\n' +
+				current['horoscope']['2017/07/6'][auguryNum]['content'] + '\n' +
+				'> :moneybag:金運　：' + replaceLuck(current['horoscope']['2017/07/6'][auguryNum]['money']) + '\n' +
+				'> :briefcase:仕事運：' + replaceLuck(current['horoscope']['2017/07/6'][auguryNum]['job']) + '\n' +
+				'> :heart:恋愛運：' + replaceLuck(current['horoscope']['2017/07/6'][auguryNum]['love']);
+				bot.replyWithTyping(message, text);
+			});
+		});
+	}
+});
+
+function replaceSign(target) {
+	if(target == "牡羊座") {
+		target = 0;
+	}else if(target == "牡牛座") {
+		target = 1;
+	}else if(target == "双子座") {
+		target = 2;
+	}else if(target == "蟹座") {
+		target = 3;
+	}else if(target == "獅子座") {
+		target = 4;
+	}else if(target == "乙女座") {
+		target = 5;
+	}else if(target == "天秤座") {
+		target = 6;
+	}else if(target == "蠍座") {
+		target = 7;
+	}else if(target == "射手座") {
+		target = 8;
+	}else if(target == "山羊座") {
+		target = 9;
+	}else if(target == "水瓶座") {
+		target = 10;
+	}else if(target == "魚座") {
+		target = 11;
+	}else {
+		target = "none";
+	}
+	return target;
+}
+
+function replaceLuck(target) {
+	if(target == 5) {
+		target = "★★★★★";
+	}else if(target == 4) {
+		target = "☆★★★★";
+	}else if(target == 3) {
+		target = "☆☆★★★";
+	}else if(target == 2) {
+		target = "☆☆☆★★";
+	}else if(target == 1) {
+		target = "☆☆☆☆★";
+	}else if(target == 0) {
+		target = "☆☆☆☆☆";
+	}
+	return target;
+}
 
 //=========================================================
 // chimpkin カウントダウン
