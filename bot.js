@@ -53,7 +53,7 @@ controller.hears('疲れた',['direct_message','direct_mention','mention','ambie
 	bot.reply(message, selectHelloTalk03);
 });
 
-controller.hears(['おはよう','おはよー'], ['direct_message','direct_mention','mention'],function(bot,message) {
+controller.hears(['おはよう','おはよー'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	var helloTalk04 = [
 		'後5分寝かせてー…',
 		'おはようー！:sunny:',
@@ -83,39 +83,39 @@ controller.hears('おやすみ',['direct_message','direct_mention','mention','am
 	bot.reply(message,'おやすみー:chipmunk::zzz:');
 });
 
-controller.hears('好き',['direct_message','direct_mention','mention'],function(bot,message) {
+controller.hears('好き',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message,'Chimpkinもー:heart_eyes:');
 });
 
-controller.hears('仕事',['direct_message','direct_mention','mention'],function(bot,message) {
+controller.hears('仕事',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message,'フレーフレー:crossed_flags:');
 });
 
-controller.hears('お寿司',['direct_message','direct_mention','mention'],function(bot,message) {
+controller.hears('お寿司',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message,'お寿司！\nお寿司いいな！:sushi:');
 });
 
-controller.hears('休憩',['direct_message','direct_mention','mention'],function(bot,message) {
+controller.hears('休憩',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message,'一休み一休み♪');
 });
 
-controller.hears('先に寝て',['direct_message','direct_mention','mention'],function(bot,message) {
+controller.hears('先に寝て',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message,'え？うん。わかっ…:zzz:');
 });
 
-controller.hears('眠たい',['direct_message','direct_mention','mention'],function(bot,message) {
+controller.hears('眠たい',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message,'起きて起きて！:clap::skin-tone-2:');
 });
 
-controller.hears('頑張ろ',['direct_message','direct_mention','mention'],function(bot,message) {
+controller.hears('頑張ろ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message,'おー！:fist::skin-tone-2:');
 });
 
-controller.hears('助けて',['direct_message','direct_mention','mention'],function(bot,message) {
+controller.hears('助けて',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message,'待ってて！すぐ行くー！:dash::dash:');
 });
 
-controller.hears('ただいま',['direct_message','direct_mention','mention'],function(bot,message) {
+controller.hears('ただいま',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message,'おかえりー:raised_hand_with_fingers_splayed::skin-tone-2:');
 });
 
@@ -141,7 +141,7 @@ controller.hears('おみくじ',['direct_message','direct_mention','mention','am
 //=========================================================
 // chimpkin 星座占い
 //=========================================================
-controller.hears(['(.*)の運勢'],["direct_message","direct_mention","mention"],function(bot,message) {
+controller.hears(['(.*)の運勢'],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
 	var augurySign = message.match[1];
 	var auguryNum = replaceSign(augurySign);
 	if(auguryNum == "none") {
