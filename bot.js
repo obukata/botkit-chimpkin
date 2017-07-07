@@ -120,6 +120,10 @@ controller.hears('ただいま',['direct_message','direct_mention','mention','am
 	bot.reply(message,'おかえりー:raised_hand_with_fingers_splayed::skin-tone-2:');
 });
 
+controller.hears('パルミジャーノ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	bot.reply(message,'**レッジャーノ!!**:spaghetti:');
+});
+
 
 //=========================================================
 // chimpkin おみくじ
