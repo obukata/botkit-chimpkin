@@ -121,7 +121,7 @@ controller.hears('ただいま',['direct_message','direct_mention','mention','am
 });
 
 controller.hears('パルミジャーノ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'**レッジャーノ!!**:spaghetti:');
+	bot.reply(message,'*レッジャーノ!!*:spaghetti:');
 });
 
 
