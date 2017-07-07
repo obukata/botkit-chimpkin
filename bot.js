@@ -150,10 +150,10 @@ controller.hears(['(.*)の運勢'],["direct_message","direct_mention","mention",
 	}else {
 		var auguryDate = new Date();
 		var auguryNowDate_Y = auguryDate.getFullYear();
-		var auguryNowDate_M = parseInt(auguryDate.getMonth()) + 1;
-		var auguryNowDate_D = auguryDate.getDate();
+		var auguryNowDate_M = ('0'+ (parseInt(auguryDate.getMonth()) + 1)).slice(-2);
+		var auguryNowDate_D = ('0'+ (auguryDate.getDate())).slice(-2);
 		var auguryNowDate = auguryNowDate_Y + "/" + auguryNowDate_M + "/" + auguryNowDate_D;
-		http.get("http://api.jugemkey.jp/api/horoscope/free/"+ auguryNowDate_Y + "/" + auguryNowDate_M + "/" + auguryNowDate_D, (response) => {
+		http.get("http://api.jugemkey.jp/api/horoscope/free/"+ auguryNowDate, (response) => {
 			let body = '';
 			response.setEncoding('utf8').on('data', (chunk) => {  body += chunk;  });
 			response.on('end', () => {
