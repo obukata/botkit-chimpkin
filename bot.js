@@ -20,6 +20,11 @@ controller.spawn({
 	}
 });
 
+var chimpkinDate = new Date();
+var chimpkinDate_Y = auguryDate.getFullYear();
+var chimpkinDate_M = ('0'+ (parseInt(auguryDate.getMonth()) + 1)).slice(-2);
+var chimpkinDate_D = ('0'+ (auguryDate.getDate())).slice(-2);
+
 
 //=========================================================
 // chimpkin 会話集
@@ -124,6 +129,12 @@ controller.hears('パルミジャーノ',['direct_message','direct_mention','men
 	bot.reply(message,'*レッジャーノ!!*:spaghetti:');
 });
 
+//=========================================================
+// chimpkin 今何年？
+//=========================================================
+controller.hears('今(.*)何年',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	bot.reply(message,'今は' + chimpkinDate_Y + '年で\n平成' + (chimpkinDate_Y - 1988) + 'だよー。');
+});
 
 //=========================================================
 // chimpkin おみくじ
