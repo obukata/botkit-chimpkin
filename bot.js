@@ -201,17 +201,24 @@ controller.hears('今(.*)何年',['direct_message','direct_mention','mention','a
 //=========================================================
 controller.hears(['(.*)のご当地キャラ'],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
 	var charaApi = "59c9c29565db8";
-	var charaKeyword = encodeURIComponent(message.match[1]);
-	http.get("http://localchara.jp/services/api/search/query/character?api_key="+ charaApi + "&keyword=" + charaKeyword, (response) => {
+	var charaKeyword = message.match[1];
+	var charaKeywordEncode = encodeURIComponent(charaKeyword);
+	http.get("http://localchara.jp/services/api/search/query/character?api_key="+ charaApi + "&keyword=" + charaKeywordEncode, (response) => {
 		let body = '';
 		response.setEncoding('utf8').on('data', (chunk) => {  body += chunk;  });
 		response.on('end', () => {
 			let current = JSON.parse(body);
-			let text =
-			current['result'][0]['image'] + '\n' +
-			current['result'][0]['name'] + '\n' +
-			':memo:' + current['result'][0]['profile'];
-			bot.replyWithTyping(message, text);
+			if(current['error'] == true) {
+				bot.replyWithTyping(message, 'うーん、わかんない…:droplet:');
+			}else {
+				var charaRand = Math.floor(Math.random() * current['total']);
+				let text =
+				current['result'][charaRand]['image'] + '\n' +
+				current['result'][charaRand]['name'] + '\n' +
+				':memo:' + current['result'][charaRand]['profile'] + '\n' +
+				'> ' + charaKeyword + "のご当地キャラ総数：" + current['total'] + "体";
+				bot.replyWithTyping(message, text);
+			}
 		});
 	});
 });
