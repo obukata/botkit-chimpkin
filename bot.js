@@ -197,6 +197,27 @@ controller.hears('今(.*)何年',['direct_message','direct_mention','mention','a
 
 
 //=========================================================
+// chimpkin ご当地キャラ
+//=========================================================
+controller.hears(['(.*)のご当地キャラ'],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
+	var charaApi = "59c9c29565db8";
+	var charaKeyword = encodeURIComponent(message.match[1]);
+	http.get("http://localchara.jp/services/api/search/query/character?api_key="+ charaApi + "&keyword=" + charaKeyword, (response) => {
+		let body = '';
+		response.setEncoding('utf8').on('data', (chunk) => {  body += chunk;  });
+		response.on('end', () => {
+			let current = JSON.parse(body);
+			let text =
+			current['result'][0]['image'] + '\n' +
+			current['result'][0]['name'] + '\n' +
+			':memo:' + current['result'][0]['profile'];
+			bot.replyWithTyping(message, text);
+		});
+	});
+});
+
+
+//=========================================================
 // chimpkin おみくじ
 //=========================================================
 controller.hears('おみくじ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
@@ -233,7 +254,6 @@ controller.hears(['(.*)の運勢'],["direct_message","direct_mention","mention",
 			response.setEncoding('utf8').on('data', (chunk) => {  body += chunk;  });
 			response.on('end', () => {
 				let current = JSON.parse(body);
-				console.log(current['horoscope'][auguryNowDate][auguryNum]);
 				let text =
 				':crown:' + current['horoscope'][auguryNowDate][auguryNum]['rank'] + '位：' + current['horoscope'][auguryNowDate][auguryNum]['sign'] + 'の今日の運勢\n' +
 				current['horoscope'][auguryNowDate][auguryNum]['content'] + '\n' +
