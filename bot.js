@@ -21,6 +21,7 @@ controller.spawn({
 });
 
 var chimpkinDate = new Date();
+var chimpkinDateNow = chimpkinDate.getTime();
 var chimpkinDate_Y = chimpkinDate.getFullYear();
 var chimpkinDate_M = ('0'+ (parseInt(chimpkinDate.getMonth()) + 1)).slice(-2);
 var chimpkinDate_D = ('0'+ (chimpkinDate.getDate())).slice(-2);
@@ -131,69 +132,64 @@ controller.hears('パルミジャーノ',['direct_message','direct_mention','men
 
 
 //=========================================================
-// chimpkin 今何年？
+// chimpkin 今何年？後何日？
 //=========================================================
 controller.hears('今(.*)何年',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message,'今は' + chimpkinDate_Y + '年で\n平成' + (chimpkinDate_Y - 1988) + '年だよー。');
 });
-
-
+controller.hears('(.*)年(.*)月(.*)日',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	var targetDay = new Date(message.match[1], message.match[2]-1, message.match[3])
+	var nowTargetDay = targetDay.getTime();
+	var diffSec = nowTargetDay - chimpkinDateNow;
+	var diffDay = diffSec / (1000 * 60 * 60 * 24);
+	var showDay = Math.ceil(diffDay);
+	if(showDay >= 0) {
+		bot.reply(message, '後' + showDay + '日だよー。');
+	}else {
+		bot.reply(message, (showDay * -1) + '日たったよー。');
+	}
+});
 //=========================================================
-// chimpkin クイズ
+// chimpkin 干支教えてー
 //=========================================================
-// controller.hears('クイズ',['direct_message','direct_mention','mention'],function(bot,message) {
-// 	bot.startConversation(message, function (err, convo) {
-// 		http.get("http://api.quizken.jp/api/captcha/format/json", (response) => {
-// 			let body = '';
-// 			response.setEncoding('utf8').on('data', (chunk) => {  body += chunk;  });
-// 			response.on('end', () => {
-// 				let current = JSON.parse(body);
-// 				var chimpkinQuiz = current['correctAnswerIndex'];
-// 				var chimpkinQuizAnsers = current['answers'][chimpkinQuiz];
-// 				var chimpkinAnswers =  0  + ' : ' + current['answers'][0] + '\n'; 
-// 				for(var i = 1; i < current['answers'].length; i++) {
-// 					chimpkinAnswers = chimpkinAnswers + i  + ' : ' + current['answers'][i] + '\n'; 
-// 				}
-// 				let text =
-// 				'問題！\n' + current['question'] + '\n' +
-// 				'```' +
-// 				chimpkinAnswers +
-// 				'```';
-// 				// convo.ask() で質問をします。
-// 				convo.ask(text, [{
-// 					pattern: ['(.*)'],
-// 					callback: function (response, convo) {
-// 					var chimpkinChoice = message.match[1];
-// 						if(chimpkinChoice == chimpkinQuiz) {
-// 							convo.say(message, '正解ー！:o:');
-// 						}else {
-// 							convo.say(message, '不正解ー！:x:\n正解は' + chimpkinQuizAnsers + 'でしたー！');
-// 						}
-// 					}
-// 					// convo.next(); // 会話を次に進めます。この場合、最初の質問にも戻ります。
-// 				}, {
-// 					default: true,
-// 					callback: function (response, convo) {
-// 						// ▼ どのパターンにもマッチしない時の処理 ▼
-// 						convo.say('不正解ー！:x:\n正解は' + chimpkinQuizAnsers + 'でしたー！');
-// 						convo.next(); // 会話を次に進めます。この場合、最初の質問にも戻ります。
-// 					}
-// 				}]);
-// 			});
-// 		// controller.hears(['(.*)'],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
-// 		// 		var chimpkinChoice = message.match[1];
-// 		// 		console.log(chimpkinChoice);
-// 		// 		console.log(chimpkinQuiz);
-// 		// 		if(chimpkinChoice == chimpkinQuiz) {
-// 		// 			bot.reply(message, '正解ー！:o:');
-// 		// 		}else {
-// 		// 			bot.reply(message, '不正解ー！:x:\n正解は' + chimpkinQuizAnsers + 'でしたー！');
-// 		// 		}
-// 		// 	});
-// 		});
-// 	});
-// });
+controller.hears('干支教えて',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	var zodiacName = replaceZodiac(chimpkinDate_Y % 12);
+	bot.reply(message,'今年は *' + zodiacName + '* だよー。\n> 干支の順番：子・丑・寅・卯・辰・巳・午・未・申・酉・戌・亥');
+});
+controller.hears('(.*)年の干支',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	var zodiacYear = message.match[1];
+	var zodiacName = replaceZodiac(message.match[1] % 12);
+	bot.reply(message, zodiacYear + '年の干支は *' + zodiacName + '* だよー。');
+});
 
+function replaceZodiac(target) {
+	if(target == 0) {
+		target = "申年[さる]";
+	}else if(target == 1) {
+		target = "酉年[とり]";
+	}else if(target == 2) {
+		target = "戌年[いぬ]";
+	}else if(target == 3) {
+		target = "亥年[いのしし]";
+	}else if(target == 4) {
+		target = "子年[ねずみ]";
+	}else if(target == 5) {
+		target = "丑年[うし]";
+	}else if(target == 6) {
+		target = "寅年[とら]";
+	}else if(target == 7) {
+		target = "卯年[うさぎ]";
+	}else if(target == 8) {
+		target = "辰年[たつ]";
+	}else if(target == 9) {
+		target = "巳年[へび]";
+	}else if(target == 10) {
+		target = "午年[うま]";
+	}else if(target == 11) {
+		target = "未年[ひつじ]";
+	}
+	return target;
+}
 
 
 //=========================================================
@@ -321,6 +317,7 @@ function replaceLuck(target) {
 	return target;
 }
 
+
 //=========================================================
 // chimpkin カウントダウン
 //=========================================================
@@ -341,38 +338,6 @@ controller.hears('カウントダウン(.*)秒前',['direct_message','direct_men
 			}
 		}, 1000);
 	}
-});
-
-//=========================================================
-// chimpkin 家計簿
-//=========================================================
-controller.hears(['家計簿'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
-	bot.reply(message, 'おっけー！メモ取るよ！:memo:\nいくら使ったのー？');
-	controller.hears(['(.*)円'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
-		var costValue = message.match[1];
-		var costDate = new Date();
-		var costNowDate_M = parseInt(costDate.getMonth()) + 1;
-		var costNowDate = costDate.getFullYear() + '/' + costNowDate_M;
-		console.log(costNowDate);
-		controller.storage.users.get(message.user, function(err, getData) {
-			if(getData) {
-				if (getData.date.costFood) {
-					var tempValue = parseInt(getData.date.costFood) + parseInt(costValue);
-					controller.storage.users.save({id: message.user, date:{data: costNowDate, costFood: tempValue}}, function(err) {
-						bot.reply(message, costValue + '円だね、覚えた！\n```\n今月の支出：' + tempValue + '円\n```');
-					});
-				}else {
-					controller.storage.users.save({id: message.user, date:{data: costNowDate, costFood: costValue}}, function(err) {
-						bot.reply(message, costValue + '円だね、覚えた！\n```\n今月の支出：' + costValue + '円\n```');
-					});
-				};
-			}else {
-				controller.storage.users.save({id: message.user, date:{data: costNowDate, costFood: costValue}}, function(err) {
-					bot.reply(message, costValue + '円だね、覚えた！\n```\n今月の支出：' + costValue + '円\n```');
-				});
-			}
-		});
-	});
 });
 
 
@@ -415,6 +380,131 @@ controller.hears(['(.*)って何'], 'direct_message,direct_mention,mention,ambie
 	});
 });
 
+// //=========================================================
+// // chimpkin 家計簿
+// //=========================================================
+// controller.hears(['家計簿'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
+// 	bot.reply(message, 'おっけー！メモ取るよ！:memo:\nいくら使ったのー？');
+// 	controller.hears(['(.*)円'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
+// 		var costValue = message.match[1];
+// 		var costDate = new Date();
+// 		var costNowDate_M = parseInt(costDate.getMonth()) + 1;
+// 		var costNowDate = costDate.getFullYear() + '/' + costNowDate_M;
+// 		console.log(costNowDate);
+// 		controller.storage.users.get(message.user, function(err, getData) {
+// 			if(getData) {
+// 				if (getData.date.costFood) {
+// 					var tempValue = parseInt(getData.date.costFood) + parseInt(costValue);
+// 					controller.storage.users.save({id: message.user, date:{data: costNowDate, costFood: tempValue}}, function(err) {
+// 						bot.reply(message, costValue + '円だね、覚えた！\n```\n今月の支出：' + tempValue + '円\n```');
+// 					});
+// 				}else {
+// 					controller.storage.users.save({id: message.user, date:{data: costNowDate, costFood: costValue}}, function(err) {
+// 						bot.reply(message, costValue + '円だね、覚えた！\n```\n今月の支出：' + costValue + '円\n```');
+// 					});
+// 				};
+// 			}else {
+// 				controller.storage.users.save({id: message.user, date:{data: costNowDate, costFood: costValue}}, function(err) {
+// 					bot.reply(message, costValue + '円だね、覚えた！\n```\n今月の支出：' + costValue + '円\n```');
+// 				});
+// 			}
+// 		});
+// 	});
+// });
+
+
+//=========================================================
+// chimpkin infogram
+//=========================================================
+// https://developers.infogr.am/rest/
+// できそうでできない。あとはまかせた。みらいのぼく。
+
+
+// controller.hears('グラフ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+// 	var infogram = new InfogramAPI('ctMfRb1kWqbQX87hN4dq5V7Og8xmFZH6', '2bCt8E9SVGh73uPIWqvx0emyoZKxVgq4');
+// 	// infogram.updateProject(project_id, 2525).then(function(data) {
+
+// 	infogram.getProject('7f798e4a-84e4-4c02-af1f-20e99c6f9bf5', { format: 'json' }).then(function(data) {
+// 	  fs.writeFile('graph.txt', data, function(err) {
+// 	    if(err) {
+// 	      return console.log(err);
+// 	    }
+
+// 	    console.log('The file was saved!');
+// 	  });
+// 	}, function(err) {
+// 	  console.error(err);
+// 	});
+
+// 	// infogram.getProject('7f798e4a-84e4-4c02-af1f-20e99c6f9bf5').then(function(data) {
+// 	//   console.log(data);
+// 	// }, function(err) {
+// 	//   console.error(err);
+// 	// });
+// 	// infogram.getLibrary().then(function(data) {
+// 	// 	console.log(data);
+// 	// 	bot.replyWithTyping(message, data[0]['thumbnail_url']);
+// 	// }, function(err) {
+// 	// 	bot.replyWithTyping(message, 'あれ？何かおかしいー。\n> ' + err );
+// 	// });
+// });
+
+
+//=========================================================
+// chimpkin クイズ
+//=========================================================
+// controller.hears('クイズ',['direct_message','direct_mention','mention'],function(bot,message) {
+// 	bot.startConversation(message, function (err, convo) {
+// 		http.get("http://api.quizken.jp/api/captcha/format/json", (response) => {
+// 			let body = '';
+// 			response.setEncoding('utf8').on('data', (chunk) => {  body += chunk;  });
+// 			response.on('end', () => {
+// 				let current = JSON.parse(body);
+// 				var chimpkinQuiz = current['correctAnswerIndex'];
+// 				var chimpkinQuizAnsers = current['answers'][chimpkinQuiz];
+// 				var chimpkinAnswers =  0  + ' : ' + current['answers'][0] + '\n'; 
+// 				for(var i = 1; i < current['answers'].length; i++) {
+// 					chimpkinAnswers = chimpkinAnswers + i  + ' : ' + current['answers'][i] + '\n'; 
+// 				}
+// 				let text =
+// 				'問題！\n' + current['question'] + '\n' +
+// 				'```' +
+// 				chimpkinAnswers +
+// 				'```';
+// 				// convo.ask() で質問をします。
+// 				convo.ask(text, [{
+// 					pattern: ['(.*)'],
+// 					callback: function (response, convo) {
+// 					var chimpkinChoice = message.match[1];
+// 						if(chimpkinChoice == chimpkinQuiz) {
+// 							convo.say(message, '正解ー！:o:');
+// 						}else {
+// 							convo.say(message, '不正解ー！:x:\n正解は' + chimpkinQuizAnsers + 'でしたー！');
+// 						}
+// 					}
+// 					// convo.next(); // 会話を次に進めます。この場合、最初の質問にも戻ります。
+// 				}, {
+// 					default: true,
+// 					callback: function (response, convo) {
+// 						// ▼ どのパターンにもマッチしない時の処理 ▼
+// 						convo.say('不正解ー！:x:\n正解は' + chimpkinQuizAnsers + 'でしたー！');
+// 						convo.next(); // 会話を次に進めます。この場合、最初の質問にも戻ります。
+// 					}
+// 				}]);
+// 			});
+// 		// controller.hears(['(.*)'],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
+// 		// 		var chimpkinChoice = message.match[1];
+// 		// 		console.log(chimpkinChoice);
+// 		// 		console.log(chimpkinQuiz);
+// 		// 		if(chimpkinChoice == chimpkinQuiz) {
+// 		// 			bot.reply(message, '正解ー！:o:');
+// 		// 		}else {
+// 		// 			bot.reply(message, '不正解ー！:x:\n正解は' + chimpkinQuizAnsers + 'でしたー！');
+// 		// 		}
+// 		// 	});
+// 		});
+// 	});
+// });
 
 
 //=========================================================
