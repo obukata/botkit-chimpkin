@@ -1,6 +1,7 @@
 const Botkit = require('botkit');
 const http = require('http');
 const request = require('superagent');
+const Twitter = require('twitter');
 
 if (!process.env.token) {
 	console.log('Error: Specify token in environment');
@@ -418,6 +419,22 @@ controller.hears(['(.*)って何'], 'direct_message,direct_mention,mention,ambie
 			}
 		}
 	});
+});
+
+
+//=========================================================
+// chimpkin twitter
+//=========================================================
+var client = new Twitter({
+	consumer_key: 'asvFVimT2yR3Aj4kyb8OmwtF9',
+	consumer_secret: 's8Bi3oNArXmxo1sG6lteP226Aa3s0X1oL1Bie1QhiIpLsksJQu',
+	access_token_key: '216266592-Zhx4yi9XSb2QUSbwZvepj94O1LPTN95AL1sC9TQ9',
+	access_token_secret: 'B1z66Bn6CEJ68nqVYrTgrc126VycbdeZkuN9v1w9dKJoG'
+});
+
+client.get('search/tweets', {q: 'ジャパンカップ'}, function(error, tweets, response) {
+	var twitterText =
+	''
 });
 
 // //=========================================================
