@@ -76,6 +76,8 @@ controller.hears('チンプキン',['direct_message','direct_mention','mention',
 		'はーいー:hand::skin-tone-2:',
 		'何か呼んだ？:chipmunk:',
 		'私がチンプキンですよー:stuck_out_tongue_closed_eyes:',
+		'なーにー？',
+		'ほい',
 	];
 	var selectHelloTalk01 = helloTalk01[Math.floor(Math.random() * helloTalk01.length)];
 	bot.reply(message, selectHelloTalk01);
@@ -86,6 +88,7 @@ controller.hears('お腹すいた',['direct_message','direct_mention','mention',
 		'食べる？これ！:apple:',
 		'今日は何を食べましょうー:fork_and_knife:',
 		'ご飯ご飯！:yum:',
+		'ぺこぺこ。ぺこぺこー。',
 	];
 	var selectHelloTalk02 = helloTalk02[Math.floor(Math.random() * helloTalk02.length)];
 	bot.reply(message, selectHelloTalk02);
@@ -96,6 +99,9 @@ controller.hears('疲れた',['direct_message','direct_mention','mention','ambie
 		'ひまわりの種でも食べる？',
 		'一休みしましょー:slightly_smiling_face:',
 		'無理しないでね:frowning:',
+		'深呼吸してみてー。どう？',
+		'ストレッチしてみよー',
+		'早く帰ろうよー',
 	];
 	var selectHelloTalk03 = helloTalk03[Math.floor(Math.random() * helloTalk03.length)];
 	bot.reply(message, selectHelloTalk03);
@@ -105,10 +111,32 @@ controller.hears(['おはよう','おはよー'], ['direct_message','direct_ment
 	var helloTalk04 = [
 		'後5分寝かせてー…',
 		'おはようー！:sunny:',
-		'今日の天気はどうでしょー。\n<@ryu> 大阪の天気教えて下さいー。',
+		'今日の天気はどうでしょー。\n<@guinea> さん、天気教えて下さいー。',
 	];
 	var selectHelloTalk04 = helloTalk04[Math.floor(Math.random() * helloTalk04.length)];
 	bot.reply(message, selectHelloTalk04);
+});
+
+controller.hears('休憩',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	var helloTalk05 = [
+		'一休み一休み♪',
+		'ごろごろしたいよー',
+		'甘い物が食べたいなー',
+		'きゅうけい！きゅうけい！',
+	];
+	var selectHelloTalk05 = helloTalk05[Math.floor(Math.random() * helloTalk05.length)];
+	bot.reply(message, selectHelloTalk05);
+});
+
+controller.hears('仕事',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	var helloTalk06 = [
+		'フレーフレー:crossed_flags:',
+		'Chimpkinのご飯代に為に頑張ってーー！',
+		'いつも大変だねー',
+		'がんばれがんばれがんばれがんばれー！',
+	];
+	var selectHelloTalk06 = helloTalk06[Math.floor(Math.random() * helloTalk06.length)];
+	bot.reply(message, selectHelloTalk06);
 });
 
 controller.hears('柏',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
@@ -135,16 +163,8 @@ controller.hears('好き',['direct_message','direct_mention','mention','ambient'
 	bot.reply(message,'Chimpkinもー:heart_eyes:');
 });
 
-controller.hears('仕事',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'フレーフレー:crossed_flags:');
-});
-
 controller.hears('お寿司',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message,'お寿司！\nお寿司いいな！:sushi:');
-});
-
-controller.hears('休憩',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'一休み一休み♪');
 });
 
 controller.hears('先に寝て',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
