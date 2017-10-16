@@ -265,17 +265,32 @@ controller.hears(['(.*)のご当地キャラ'],["direct_message","direct_mention
 // chimpkin おみくじ
 //=========================================================
 controller.hears('おみくじ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	var omikujiArray = [
-		'*大吉* いい日になるよいいねー',
-		'*中吉* まぁまぁな日もあるよねー',
-		'*小吉* ちょっとくらいの幸せが心地いいもんだよねー',
-		'*吉* みゆきちが出たら大当たりー！パフパフ♪',
-		'*半吉* みゆきち半人前パワー',
-		'*末吉* みゆきちの末の姿。おばあちゃん。',
-		'*凶* :scream:',
-		];
-	var omikujiResult = omikujiArray[Math.floor(Math.random() * omikujiArray.length)];
-	bot.reply(message, omikujiResult);
+	console.log(message);
+	if(message.user == 'U5MPH15RU') {
+		var omikujiArray = [
+			'*大吉* 今日は最高の日だぜ:sunglasses:',
+			'*大吉* 素晴らしい日になりそうだぜ:sunglasses:',
+			'*大吉* awesomeだぜ:sunglasses:',
+			'*大吉* 何事もうまく行くんだぜ:sunglasses:',
+			'*中吉* 常人の2倍運がいいんだぜ:sunglasses:',
+			'*中吉* 無くしたものも2倍になって帰ってくるぜ:sunglasses:',
+			'*小吉* 今日は対戦で勝ちまくれるぜ:sunglasses:',
+			];
+		var omikujiResult = omikujiArray[Math.floor(Math.random() * omikujiArray.length)];
+		bot.reply(message, omikujiResult);
+	}else {
+		var omikujiArray = [
+			'*大吉* いい日になるよいいねー',
+			'*中吉* まぁまぁな日もあるよねー',
+			'*小吉* ちょっとくらいの幸せが心地いいもんだよねー',
+			'*吉* みゆきちが出たら大当たりー！パフパフ♪',
+			'*半吉* みゆきち半人前パワー',
+			'*末吉* みゆきちの末の姿。おばあちゃん。',
+			'*凶* :scream:',
+			];
+		var omikujiResult = omikujiArray[Math.floor(Math.random() * omikujiArray.length)];
+		bot.reply(message, omikujiResult);
+	}
 });
 
 
