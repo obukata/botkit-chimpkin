@@ -409,11 +409,7 @@ function replaceLuck(target) {
 //=========================================================
 controller.hears('カウントダウン(.*)秒前',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	var countDownNum = message.match[1];
-	if(countDownNum <= 0) {
-		bot.reply(message, 'ん？何かおかしくない？:thinking_face:');
-	}else if(countDownNum >= 20) {
-		bot.reply(message, '長くないー？:expressionless:');
-	}else {
+	if(countDownNum >= 0 && countDownNum <= 10) {
 		var countDownTimer = setInterval(function() {
 			if(countDownNum <= 0) {
 				bot.reply(message, ':boom:どかーん！:boom:');
@@ -423,6 +419,10 @@ controller.hears('カウントダウン(.*)秒前',['direct_message','direct_men
 				countDownNum--;
 			}
 		}, 1000);
+	}else if(countDownNum >= 20) {
+		bot.reply(message, '長くないー？:expressionless:');
+	}else {
+		bot.reply(message, '何かおかしーよー');
 	}
 });
 
