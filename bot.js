@@ -477,10 +477,38 @@ var client = new Twitter({
 	access_token_secret: 'B1z66Bn6CEJ68nqVYrTgrc126VycbdeZkuN9v1w9dKJoG'
 });
 
-client.get('search/tweets', {q: 'ジャパンカップ'}, function(error, tweets, response) {
-	var twitterText =
-	''
+// client.stream( 'statuses/filter', { track : '#はじめてのツイート' }, function( stream ) {
+// 	stream.on( 'data', function( data ) {
+// 		console.log(data);
+// 		var text = data.text;
+// 		bot.say({
+// 			text: text,
+// 			channel: "#dev_botkit"
+// 		});
+// 		// bot.say({
+// 		// 	text: '*#はじめてのツイート:*' + text,
+// 		// 	channel: "#dev_botkit"
+// 		// });
+// 	});
+// });
+controller.hears(['twitter'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
+	client.get('search/tweets', {q: 'node.js'}, (error, tweets, response) => {
+		const text = tweets.statuses[0].text; //検索して引っかかった1件目のツイート本文
+		console.log(text);
+		// client.post('statuses/update', {status: text}, (error, tw) => { //パクツイ
+		// 	if (error) {
+		// 		console.log(error);
+		// 		return;
+		// 	}
+		// 	console.log(`id: ${tw.id}, text: ${tw.text}`);
+		// });
+	});
 });
+
+// client.get('search/tweets', {q: 'ジャパンカップ'}, function(error, tweets, response) {
+// 	var twitterText =
+// 	''
+// });
 
 // //=========================================================
 // // chimpkin 家計簿
