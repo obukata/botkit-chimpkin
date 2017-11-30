@@ -27,6 +27,17 @@ var chimpkinDate_Y = chimpkinDate.getFullYear();
 var chimpkinDate_M = ('0'+ (parseInt(chimpkinDate.getMonth()) + 1)).slice(-2);
 var chimpkinDate_D = ('0'+ (chimpkinDate.getDate())).slice(-2);
 
+//=========================================================
+// 汎用メソッド
+//=========================================================
+// 配列をランダムで返す。 返答パターンなどに使用。
+function getRandom(array) {
+	if(!array) {
+		return;
+	} else {
+		return array[Math.floor(Math.random() * array.length)];
+	}
+}
 
 //=========================================================
 // chimpkin ヘルプ
@@ -72,71 +83,59 @@ controller.hears('何が出来る',['direct_message','direct_mention','mention',
 // chimpkin 会話集
 //=========================================================
 controller.hears('チンプキン',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	var helloTalk01 = [
+	bot.reply(message, getRandom([
 		'はーいー:hand::skin-tone-2:',
 		'何か呼んだ？:chipmunk:',
 		'私がチンプキンですよー:stuck_out_tongue_closed_eyes:',
 		'なーにー？',
-		'ほい',
-	];
-	var selectHelloTalk01 = helloTalk01[Math.floor(Math.random() * helloTalk01.length)];
-	bot.reply(message, selectHelloTalk01);
+		'ほい'
+	]));
 });
 
 controller.hears('お腹すいた',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	var helloTalk02 = [
+	bot.reply(message, getRandom([
 		'食べる？これ！:apple:',
 		'今日は何を食べましょうー:fork_and_knife:',
 		'ご飯ご飯！:yum:',
 		'ぺこぺこ。ぺこぺこー。',
-	];
-	var selectHelloTalk02 = helloTalk02[Math.floor(Math.random() * helloTalk02.length)];
-	bot.reply(message, selectHelloTalk02);
+	]));
 });
 
 controller.hears('疲れた',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	var helloTalk03 = [
+	bot.reply(message, getRandom([
 		'ひまわりの種でも食べる？',
 		'一休みしましょー:slightly_smiling_face:',
 		'無理しないでね:frowning:',
 		'深呼吸してみてー。どう？',
 		'ストレッチしてみよー',
 		'早く帰ろうよー',
-	];
-	var selectHelloTalk03 = helloTalk03[Math.floor(Math.random() * helloTalk03.length)];
-	bot.reply(message, selectHelloTalk03);
+	]));
 });
 
 controller.hears(['おはよう','おはよー'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	var helloTalk04 = [
+	bot.reply(message, getRandom([
 		'後5分寝かせてー…',
 		'おはようー！:sunny:',
 		'今日の天気はどうでしょー。\n<@guinea> さん、天気教えて下さいー。',
-	];
-	var selectHelloTalk04 = helloTalk04[Math.floor(Math.random() * helloTalk04.length)];
-	bot.reply(message, selectHelloTalk04);
+	]));
 });
 
 controller.hears('休憩',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	var helloTalk05 = [
+	bot.reply(message, getRandom([
 		'一休み一休み♪',
 		'ごろごろしたいよー',
 		'甘い物が食べたいなー',
 		'きゅうけい！きゅうけい！',
-	];
-	var selectHelloTalk05 = helloTalk05[Math.floor(Math.random() * helloTalk05.length)];
-	bot.reply(message, selectHelloTalk05);
+	]));
 });
 
 controller.hears('仕事',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	var helloTalk06 = [
+	bot.reply(message, getRandom([
 		'フレーフレー:crossed_flags:',
 		'Chimpkinのご飯代に為に頑張ってーー！',
 		'いつも大変だねー',
 		'がんばれがんばれがんばれがんばれー！',
-	];
-	var selectHelloTalk06 = helloTalk06[Math.floor(Math.random() * helloTalk06.length)];
-	bot.reply(message, selectHelloTalk06);
+	]));
 });
 
 controller.hears('柏',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
@@ -287,7 +286,7 @@ controller.hears(['(.*)のご当地キャラ'],["direct_message","direct_mention
 controller.hears('おみくじ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	console.log(message);
 	if(message.user == 'U5MPH15RU') {
-		var omikujiArray = [
+		bot.reply(message, getRandom([
 			'*大吉* 今日は最高の日だぜ:sunglasses:',
 			'*大吉* 素晴らしい日になりそうだぜ:sunglasses:',
 			'*大吉* awesomeだぜ:sunglasses:',
@@ -295,11 +294,9 @@ controller.hears('おみくじ',['direct_message','direct_mention','mention','am
 			'*中吉* 常人の2倍運がいいんだぜ:sunglasses:',
 			'*中吉* 無くしたものも2倍になって帰ってくるぜ:sunglasses:',
 			'*小吉* 今日は対戦で勝ちまくれるぜ:sunglasses:',
-			];
-		var omikujiResult = omikujiArray[Math.floor(Math.random() * omikujiArray.length)];
-		bot.reply(message, omikujiResult);
+		]));
 	}else {
-		var omikujiArray = [
+		bot.reply(message, getRandom([
 			'*大吉* いい日になるよいいねー',
 			'*中吉* 今日は甘ーいものを食べるとよいよい',
 			'*中吉* まぁまぁな日もあるよねー',
@@ -317,9 +314,7 @@ controller.hears('おみくじ',['direct_message','direct_mention','mention','am
 			'*末吉* みゆきちの末の姿。おばあちゃん。',
 			'*凶* :scream:',
 			'*罰* 今日、自転車25kmね。絶対だよ？',
-			];
-		var omikujiResult = omikujiArray[Math.floor(Math.random() * omikujiArray.length)];
-		bot.reply(message, omikujiResult);
+		]));
 	}
 });
 
