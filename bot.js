@@ -138,6 +138,26 @@ controller.hears('仕事',['direct_message','direct_mention','mention','ambient'
 	]));
 });
 
+controller.hears(['どう思う','どう？','どっちがいい','何がいい','どれに'],['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	bot.reply(message, 'ちょっと待ってね。');
+	bot.reply(message, getRandom([
+		'I=∫Xh(x)r(x)dx=Er[h(x)]',
+		'I=∫Xh(x)r(x)q(x)q(x)dx=Eq[h(x)r(x)q(x)]',
+		'P(xn+1=en+1|x0=e0,x1=e1,…,xn=en)=P(xn+1=en+1|xn=en)',
+		'pijpji=rjri⟺qijα(i→j)qjiα(j→i)=rjri⟺α(i→j)α(j→i)=rjqjiriqij',
+		'limN→∞P(min(f(x1),f(x2),…,f(xN))=f(x∗))=1',
+		'∑i∈Xripij=rj∑i∈Xpji=rj'
+	]));
+	bot.reply(message, getRandom([
+		'わかんない。',
+		'いーんじゃない。',
+		'悪くはないよ。',
+		'いいね！',
+		'そうだね。',
+		'...Zzz'
+	]));
+});
+
 controller.hears('柏',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message,'田舎の事？:thinking_face:');
 });
