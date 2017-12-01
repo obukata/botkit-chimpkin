@@ -21,11 +21,11 @@ controller.spawn({
 	}
 });
 
-var chimpkinDate = new Date();
-var chimpkinDateNow = chimpkinDate.getTime();
-var chimpkinDate_Y = chimpkinDate.getFullYear();
-var chimpkinDate_M = ('0'+ (parseInt(chimpkinDate.getMonth()) + 1)).slice(-2);
-var chimpkinDate_D = ('0'+ (chimpkinDate.getDate())).slice(-2);
+const chimpkinDate = new Date();
+const chimpkinDateNow = chimpkinDate.getTime();
+const chimpkinDate_Y = chimpkinDate.getFullYear();
+const chimpkinDate_M = ('0'+ (parseInt(chimpkinDate.getMonth()) + 1)).slice(-2);
+const chimpkinDate_D = ('0'+ (chimpkinDate.getDate())).slice(-2);
 
 //=========================================================
 // 汎用メソッド
@@ -43,7 +43,7 @@ function getRandom(array) {
 // chimpkin ヘルプ
 //=========================================================
 controller.hears('何が出来る',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	var helpText =
+	bot.reply(message,
 		'*■ 今何年？後何日？*\n' +
 		'> 今が西暦何年で、平成何年か教えるよー。\n' +
 		'```今(.*)何年```\n' +
@@ -75,7 +75,7 @@ controller.hears('何が出来る',['direct_message','direct_mention','mention',
 		'*■ wikipedia*\n' +
 		'> wikipediaで調べてくるよ！\n' +
 		'```(.*)って何```\n';
-	bot.reply(message, helpText);
+	);
 });
 
 
@@ -218,11 +218,11 @@ controller.hears('今(.*)何年',['direct_message','direct_mention','mention','a
 	bot.reply(message,'今は' + chimpkinDate_Y + '年で\n平成' + (chimpkinDate_Y - 1988) + '年だよー。');
 });
 controller.hears('(.*)年(.*)月(.*)日',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	var targetDay = new Date(message.match[1], message.match[2]-1, message.match[3])
-	var nowTargetDay = targetDay.getTime();
-	var diffSec = nowTargetDay - chimpkinDateNow;
-	var diffDay = diffSec / (1000 * 60 * 60 * 24);
-	var showDay = Math.ceil(diffDay);
+	const targetDay = new Date(message.match[1], message.match[2]-1, message.match[3])
+	const nowTargetDay = targetDay.getTime();
+	const diffSec = nowTargetDay - chimpkinDateNow;
+	const diffDay = diffSec / (1000 * 60 * 60 * 24);
+	const showDay = Math.ceil(diffDay);
 	if(showDay >= 0) {
 		bot.reply(message, '後' + showDay + '日だよー。');
 	}else {
@@ -233,12 +233,12 @@ controller.hears('(.*)年(.*)月(.*)日',['direct_message','direct_mention','men
 // chimpkin 干支教えてー
 //=========================================================
 controller.hears('干支教えて',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	var zodiacName = replaceZodiac(chimpkinDate_Y % 12);
+	const zodiacName = replaceZodiac(chimpkinDate_Y % 12);
 	bot.reply(message,'今年は *' + zodiacName + '* だよー。\n> 干支の順番：子・丑・寅・卯・辰・巳・午・未・申・酉・戌・亥');
 });
 controller.hears('(.*)年の干支',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	var zodiacYear = message.match[1];
-	var zodiacName = replaceZodiac(message.match[1] % 12);
+	const zodiacYear = message.match[1];
+	const zodiacName = replaceZodiac(message.match[1] % 12);
 	bot.reply(message, zodiacYear + '年の干支は *' + zodiacName + '* だよー。');
 });
 
@@ -276,9 +276,9 @@ function replaceZodiac(target) {
 // chimpkin ご当地キャラ
 //=========================================================
 controller.hears(['(.*)のご当地キャラ'],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
-	var charaApi = "59c9c29565db8";
-	var charaKeyword = message.match[1];
-	var charaKeywordEncode = encodeURIComponent(charaKeyword);
+	const charaApi = "59c9c29565db8";
+	const charaKeyword = message.match[1];
+	const charaKeywordEncode = encodeURIComponent(charaKeyword);
 	http.get("http://localchara.jp/services/api/search/query/character?api_key="+ charaApi + "&keyword=" + charaKeywordEncode, (response) => {
 		let body = '';
 		response.setEncoding('utf8').on('data', (chunk) => {  body += chunk;  });
@@ -287,7 +287,7 @@ controller.hears(['(.*)のご当地キャラ'],["direct_message","direct_mention
 			if(current['error'] == true) {
 				bot.replyWithTyping(message, 'うーん、わかんない…:droplet:');
 			}else {
-				var charaRand = Math.floor(Math.random() * current['total']);
+				const charaRand = Math.floor(Math.random() * current['total']);
 				let text =
 				current['result'][charaRand]['image'] + '\n' +
 				current['result'][charaRand]['name'] + '\n' +
@@ -343,16 +343,16 @@ controller.hears('おみくじ',['direct_message','direct_mention','mention','am
 // chimpkin 星座占い
 //=========================================================
 controller.hears(['(.*)の運勢'],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
-	var augurySign = message.match[1];
-	var auguryNum = replaceSign(augurySign);
+	const augurySign = message.match[1];
+	const auguryNum = replaceSign(augurySign);
 	if(auguryNum == "none") {
 		bot.replyWithTyping(message, 'その星座知らない…:droplet:');
 	}else {
-		var auguryDate = new Date();
-		var auguryNowDate_Y = auguryDate.getFullYear();
-		var auguryNowDate_M = ('0'+ (parseInt(auguryDate.getMonth()) + 1)).slice(-2);
-		var auguryNowDate_D = ('0'+ (auguryDate.getDate())).slice(-2);
-		var auguryNowDate = auguryNowDate_Y + "/" + auguryNowDate_M + "/" + auguryNowDate_D;
+		const auguryDate = new Date();
+		const auguryNowDate_Y = auguryDate.getFullYear();
+		const auguryNowDate_M = ('0'+ (parseInt(auguryDate.getMonth()) + 1)).slice(-2);
+		const auguryNowDate_D = ('0'+ (auguryDate.getDate())).slice(-2);
+		const auguryNowDate = auguryNowDate_Y + "/" + auguryNowDate_M + "/" + auguryNowDate_D;
 		http.get("http://api.jugemkey.jp/api/horoscope/free/"+ auguryNowDate, (response) => {
 			let body = '';
 			response.setEncoding('utf8').on('data', (chunk) => {  body += chunk;  });
@@ -423,9 +423,9 @@ function replaceLuck(target) {
 // chimpkin カウントダウン
 //=========================================================
 controller.hears('カウントダウン(.*)秒前',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	var countDownNum = message.match[1];
+	const countDownNum = message.match[1];
 	if(countDownNum >= 0 && countDownNum <= 10) {
-		var countDownTimer = setInterval(function() {
+		const countDownTimer = setInterval(function() {
 			if(countDownNum <= 0) {
 				bot.reply(message, ':boom:どかーん！:boom:');
 				clearInterval(countDownTimer);
@@ -445,10 +445,10 @@ controller.hears('カウントダウン(.*)秒前',['direct_message','direct_men
 //=========================================================
 // chimpkin pedia
 //=========================================================
-var WIKIPEDIA_URL = 'https://ja.wikipedia.org/wiki/';
+const WIKIPEDIA_URL = 'https://ja.wikipedia.org/wiki/';
 
 controller.hears(['(.*)って何'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
-	var word = message.match[1];
+	const word = message.match[1];
 	request
 	.get('https://ja.wikipedia.org/w/api.php')
 	.query({
@@ -460,10 +460,10 @@ controller.hears(['(.*)って何'], 'direct_message,direct_mention,mention,ambie
 		titles : word
 	})
 	.end(function (err, res) {
-		var query = res.body.query;
+		const query = res.body.query;
 		if (query && query.pages) {
-			for (var p in query.pages) {
-				var content = query.pages[p].extract;
+			for (let p in query.pages) {
+				let content = query.pages[p].extract;
 				if (content) {
 					// slackで引用スタイルを適用するために`>` をつける
 					content = '> ' + content.replace(/\n/g, '\n> ');
@@ -485,7 +485,7 @@ controller.hears(['(.*)って何'], 'direct_message,direct_mention,mention,ambie
 //=========================================================
 // chimpkin twitter
 //=========================================================
-var client = new Twitter({
+const client = new Twitter({
 	consumer_key: 'asvFVimT2yR3Aj4kyb8OmwtF9',
 	consumer_secret: 's8Bi3oNArXmxo1sG6lteP226Aa3s0X1oL1Bie1QhiIpLsksJQu',
 	access_token_key: '216266592-Zhx4yi9XSb2QUSbwZvepj94O1LPTN95AL1sC9TQ9',
@@ -503,7 +503,7 @@ var client = new Twitter({
 // 		stream.on( 'data', function( data ) {
 // 			console.log(data);
 // 			console.log("before text");
-// 			var text = data.text;
+// 			const text = data.text;
 // 			console.log(text);
 // 			bot.say({
 // 				text: '> ' + text,
@@ -530,7 +530,7 @@ var client = new Twitter({
 // });
 
 // client.get('search/tweets', {q: 'ジャパンカップ'}, function(error, tweets, response) {
-// 	var twitterText =
+// 	const twitterText =
 // 	''
 // });
 
@@ -540,15 +540,15 @@ var client = new Twitter({
 // controller.hears(['家計簿'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
 // 	bot.reply(message, 'おっけー！メモ取るよ！:memo:\nいくら使ったのー？');
 // 	controller.hears(['(.*)円'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
-// 		var costValue = message.match[1];
-// 		var costDate = new Date();
-// 		var costNowDate_M = parseInt(costDate.getMonth()) + 1;
-// 		var costNowDate = costDate.getFullYear() + '/' + costNowDate_M;
+// 		const costValue = message.match[1];
+// 		const costDate = new Date();
+// 		const costNowDate_M = parseInt(costDate.getMonth()) + 1;
+// 		const costNowDate = costDate.getFullYear() + '/' + costNowDate_M;
 // 		console.log(costNowDate);
 // 		controller.storage.users.get(message.user, function(err, getData) {
 // 			if(getData) {
 // 				if (getData.date.costFood) {
-// 					var tempValue = parseInt(getData.date.costFood) + parseInt(costValue);
+// 					const tempValue = parseInt(getData.date.costFood) + parseInt(costValue);
 // 					controller.storage.users.save({id: message.user, date:{data: costNowDate, costFood: tempValue}}, function(err) {
 // 						bot.reply(message, costValue + '円だね、覚えた！\n```\n今月の支出：' + tempValue + '円\n```');
 // 					});
@@ -575,7 +575,7 @@ var client = new Twitter({
 
 
 // controller.hears('グラフ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-// 	var infogram = new InfogramAPI('ctMfRb1kWqbQX87hN4dq5V7Og8xmFZH6', '2bCt8E9SVGh73uPIWqvx0emyoZKxVgq4');
+// 	const infogram = new InfogramAPI('ctMfRb1kWqbQX87hN4dq5V7Og8xmFZH6', '2bCt8E9SVGh73uPIWqvx0emyoZKxVgq4');
 // 	// infogram.updateProject(project_id, 2525).then(function(data) {
 
 // 	infogram.getProject('7f798e4a-84e4-4c02-af1f-20e99c6f9bf5', { format: 'json' }).then(function(data) {
@@ -614,10 +614,10 @@ var client = new Twitter({
 // 			response.setEncoding('utf8').on('data', (chunk) => {  body += chunk;  });
 // 			response.on('end', () => {
 // 				let current = JSON.parse(body);
-// 				var chimpkinQuiz = current['correctAnswerIndex'];
-// 				var chimpkinQuizAnsers = current['answers'][chimpkinQuiz];
-// 				var chimpkinAnswers =  0  + ' : ' + current['answers'][0] + '\n'; 
-// 				for(var i = 1; i < current['answers'].length; i++) {
+// 				const chimpkinQuiz = current['correctAnswerIndex'];
+// 				const chimpkinQuizAnsers = current['answers'][chimpkinQuiz];
+// 				const chimpkinAnswers =  0  + ' : ' + current['answers'][0] + '\n'; 
+// 				for(let i = 1; i < current['answers'].length; i++) {
 // 					chimpkinAnswers = chimpkinAnswers + i  + ' : ' + current['answers'][i] + '\n'; 
 // 				}
 // 				let text =
@@ -629,7 +629,7 @@ var client = new Twitter({
 // 				convo.ask(text, [{
 // 					pattern: ['(.*)'],
 // 					callback: function (response, convo) {
-// 					var chimpkinChoice = message.match[1];
+// 					const chimpkinChoice = message.match[1];
 // 						if(chimpkinChoice == chimpkinQuiz) {
 // 							convo.say(message, '正解ー！:o:');
 // 						}else {
@@ -647,7 +647,7 @@ var client = new Twitter({
 // 				}]);
 // 			});
 // 		// controller.hears(['(.*)'],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
-// 		// 		var chimpkinChoice = message.match[1];
+// 		// 		const chimpkinChoice = message.match[1];
 // 		// 		console.log(chimpkinChoice);
 // 		// 		console.log(chimpkinQuiz);
 // 		// 		if(chimpkinChoice == chimpkinQuiz) {
@@ -688,7 +688,7 @@ var client = new Twitter({
 //     // 「◯◯って呼んで」の、◯◯の部分を取り出します。
 //     // message.match[1] には、hearsの正規表現にマッチした単語が入っています。
 
-//     var name_from_msg = message.match[1];
+//     const name_from_msg = message.match[1];
 
 
 //     // まず、controller.storage.users.getで、ユーザーデータを取得します。
