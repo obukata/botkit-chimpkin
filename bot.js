@@ -143,7 +143,7 @@ controller.hears(['どう思う','どう？','どっちがいい','何がいい'
 		'ちょっと待ってね。',
 		'うーんとねー',
 		'考える！'
-	]);
+	]));
 	setTimeout(function() {
 		bot.reply(message, getRandom([
 			'I=∫Xh(x)r(x)dx=Er[h(x)]',
