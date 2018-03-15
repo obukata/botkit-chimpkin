@@ -167,11 +167,20 @@ controller.hears(['どう思う','どう？','どっちがいい','何がいい'
 });
 
 controller.hears('柏',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'田舎の事？:thinking_face:');
+	bot.reply(message, getRandom([
+		'田舎の事？:thinking_face:',
+		'わーしか！',
+		'ベイブ都会へ行く'
+	]));
 });
 
 controller.hears('頑張って',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'頑張るよー！:smiley:');
+	bot.reply(message, getRandom([
+		'頑張るよー！:smiley:',
+		'任せなさい！:sunglasses:',
+		'頑張れ頑張れー力の限りがんばれー'
+	]));
+	bot.reply(message,'');
 });
 
 controller.hears('車運転',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
@@ -431,23 +440,37 @@ function replaceLuck(target) {
 // chimpkin カウントダウン
 //=========================================================
 controller.hears('カウントダウン(.*)秒前',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	const countDownNum = message.match[1];
-	if(countDownNum >= 0 && countDownNum <= 10) {
+	let countDownNum = parseInt(message.match[1])
+	if(1 <= countDownNum && countDownNum <= 3600) {
 		const countDownTimer = setInterval(function() {
-			if(countDownNum <= 0) {
-				bot.reply(message, ':boom:どかーん！:boom:');
-				clearInterval(countDownTimer);
+			if(1 <= countDownNum && countDownNum <= 5) {
+				bot.reply(message, countDownNum + '秒前！')
+				countDownNum--
+			}else if(6 <= countDownNum && countDownNum <= 60) {
+				if(countDownNum % 10) {
+					countDownNum--
+				}else {
+					bot.reply(message, countDownNum + '秒前！')
+					countDownNum--
+				}
+			}else if(61 <= countDownNum && countDownNum <= 3600) {
+				if(countDownNum % 60) {
+					countDownNum--
+				}else {
+					bot.reply(message, countDownNum / 60 + '分前！')
+					countDownNum--
+				}
 			}else {
-				bot.reply(message, countDownNum + '秒前！');
-				countDownNum--;
+				bot.reply(message, ':boom:どかーん！:boom:')
+				clearInterval(countDownTimer)
 			}
-		}, 1000);
-	}else if(countDownNum >= 20) {
-		bot.reply(message, '長くないー？:expressionless:');
+		}, 1000)
+	}else if(3600 <= countDownNum) {
+		bot.reply(message, '長くないー？:expressionless:')
 	}else {
-		bot.reply(message, '何かおかしーよー');
+		bot.reply(message, '何かおかしーよー')
 	}
-});
+})
 
 
 //=========================================================
