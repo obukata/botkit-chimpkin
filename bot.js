@@ -250,43 +250,30 @@ controller.hears('(.*)年(.*)月(.*)日',['direct_message','direct_mention','men
 // chimpkin 干支教えてー
 //=========================================================
 controller.hears('干支教えて',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	const zodiacName = replaceZodiac(chimpkinDate_Y % 12);
+	const zodiacName = zodiac[chimpkinDate_Y % 12];
 	bot.reply(message,'今年は *' + zodiacName + '* だよー。\n> 干支の順番：子・丑・寅・卯・辰・巳・午・未・申・酉・戌・亥');
 });
 controller.hears('(.*)年の干支',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	const zodiacYear = message.match[1];
-	const zodiacName = replaceZodiac(message.match[1] % 12);
+	const zodiacName = zodiac[message.match[1] % 12];
 	bot.reply(message, zodiacYear + '年の干支は *' + zodiacName + '* だよー。');
 });
 
-function replaceZodiac(target) {
-	if(target == 0) {
-		target = "申年[さる]";
-	}else if(target == 1) {
-		target = "酉年[とり]";
-	}else if(target == 2) {
-		target = "戌年[いぬ]";
-	}else if(target == 3) {
-		target = "亥年[いのしし]";
-	}else if(target == 4) {
-		target = "子年[ねずみ]";
-	}else if(target == 5) {
-		target = "丑年[うし]";
-	}else if(target == 6) {
-		target = "寅年[とら]";
-	}else if(target == 7) {
-		target = "卯年[うさぎ]";
-	}else if(target == 8) {
-		target = "辰年[たつ]";
-	}else if(target == 9) {
-		target = "巳年[へび]";
-	}else if(target == 10) {
-		target = "午年[うま]";
-	}else if(target == 11) {
-		target = "未年[ひつじ]";
-	}
-	return target;
+const zodiac = {
+	0: '申年[さる]',
+	1: '酉年[とり]',
+	2: '戌年[いぬ]',
+	3: '亥年[いのしし]',
+	4: '子年[ねずみ]',
+	5: '丑年[うし]',
+	6: '寅年[とら]',
+	7: '卯年[うさぎ]',
+	8: '辰年[たつ]',
+	9: '巳年[へび]',
+	10: '午年[うま]',
+	11: '未年[ひつじ]'
 }
+
 
 
 //=========================================================
@@ -361,7 +348,7 @@ controller.hears('おみくじ',['direct_message','direct_mention','mention','am
 //=========================================================
 controller.hears(['(.*)の運勢'],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
 	const augurySign = message.match[1];
-	const auguryNum = replaceSign(augurySign);
+	const auguryNum = asterism[augurySign];
 	if(auguryNum == "none") {
 		bot.replyWithTyping(message, 'その星座知らない…:droplet:');
 	}else {
@@ -378,61 +365,36 @@ controller.hears(['(.*)の運勢'],["direct_message","direct_mention","mention",
 				let text =
 				':crown:' + current['horoscope'][auguryNowDate][auguryNum]['rank'] + '位：' + current['horoscope'][auguryNowDate][auguryNum]['sign'] + 'の今日の運勢\n' +
 				current['horoscope'][auguryNowDate][auguryNum]['content'] + '\n' +
-				'> :moneybag:金運　：' + replaceLuck(current['horoscope'][auguryNowDate][auguryNum]['money']) + '\n' +
-				'> :briefcase:仕事運：' + replaceLuck(current['horoscope'][auguryNowDate][auguryNum]['job']) + '\n' +
-				'> :heart:恋愛運：' + replaceLuck(current['horoscope'][auguryNowDate][auguryNum]['love']);
+				'> :moneybag:金運　：' + asterismLuck[current['horoscope'][auguryNowDate][auguryNum]['money']] + '\n' +
+				'> :briefcase:仕事運：' + asterismLuck[current['horoscope'][auguryNowDate][auguryNum]['job']] + '\n' +
+				'> :heart:恋愛運：' + asterismLuck[current['horoscope'][auguryNowDate][auguryNum]['love']];
 				bot.replyWithTyping(message, text);
 			});
 		});
 	}
 });
 
-function replaceSign(target) {
-	if(target == "牡羊座") {
-		target = 0;
-	}else if(target == "牡牛座") {
-		target = 1;
-	}else if(target == "双子座") {
-		target = 2;
-	}else if(target == "蟹座") {
-		target = 3;
-	}else if(target == "獅子座") {
-		target = 4;
-	}else if(target == "乙女座") {
-		target = 5;
-	}else if(target == "天秤座") {
-		target = 6;
-	}else if(target == "蠍座") {
-		target = 7;
-	}else if(target == "射手座") {
-		target = 8;
-	}else if(target == "山羊座") {
-		target = 9;
-	}else if(target == "水瓶座") {
-		target = 10;
-	}else if(target == "魚座") {
-		target = 11;
-	}else {
-		target = "none";
-	}
-	return target;
+const asterism = {
+	'牡羊座':		0,
+	'牡牛座':		1,
+	'双子座':		2,
+	'蟹座':			3,
+	'獅子座':		4,
+	'乙女座':		5,
+	'天秤座':		6,
+	'蠍座':			7,
+	'射手座':		8,
+	'山羊座':		9,
+	'水瓶座':		10,
+	'魚座':			11
 }
-
-function replaceLuck(target) {
-	if(target == 5) {
-		target = "★★★★★";
-	}else if(target == 4) {
-		target = "★★★★☆";
-	}else if(target == 3) {
-		target = "★★★☆☆";
-	}else if(target == 2) {
-		target = "★★☆☆☆";
-	}else if(target == 1) {
-		target = "★☆☆☆☆";
-	}else if(target == 0) {
-		target = "☆☆☆☆☆";
-	}
-	return target;
+const asterismLuck = {
+	5: '★★★★★',
+	4: '★★★★☆',
+	3: '★★★☆☆',
+	2: '★★☆☆☆',
+	1: '★☆☆☆☆',
+	0: '☆☆☆☆☆'
 }
 
 
@@ -454,7 +416,7 @@ controller.hears('カウントダウン(.*)秒前',['direct_message','direct_men
 					countDownNum--
 				}
 			}else if(61 <= countDownNum && countDownNum <= 3600) {
-				if(countDownNum % 60) {
+				if(countDownNum % (60 * 10)) {
 					countDownNum--
 				}else {
 					bot.reply(message, countDownNum / 60 + '分前！')
