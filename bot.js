@@ -1,31 +1,51 @@
-const Botkit = require('botkit');
-const http = require('http');
-const request = require('superagent');
-const Twitter = require('twitter');
+const Botkit = require('botkit')
+const http = require('http')
+const request = require('superagent')
+const Twitter = require('twitter')
 
 if (!process.env.token) {
-	console.log('Error: Specify token in environment');
-	process.exit(1);
+	console.log('Error: Specify token in environment')
+	process.exit(1)
 }
 
 const controller = Botkit.slackbot({
 	debug: false,
 	json_file_store: 'storage_bot_db'
-});
+})
 
 controller.spawn({
 	token: process.env.token
 }).startRTM(function(err){
 	if (err) {
-		throw new Error(err);
+		throw new Error(err)
 	}
-});
+})
 
-const chimpkinDate = new Date();
-const chimpkinDateNow = chimpkinDate.getTime();
-const chimpkinDate_Y = chimpkinDate.getFullYear();
-const chimpkinDate_M = ('0'+ (parseInt(chimpkinDate.getMonth()) + 1)).slice(-2);
-const chimpkinDate_D = ('0'+ (chimpkinDate.getDate())).slice(-2);
+//=========================================================
+// いろんなセット
+//=========================================================
+const chimpkinDate = new Date()
+const chimpkinDateNow = chimpkinDate.getTime()
+const chimpkinDate_Y = chimpkinDate.getFullYear()
+const chimpkinDate_M = ('0'+ (parseInt(chimpkinDate.getMonth()) + 1)).slice(-2)
+const chimpkinDate_D = ('0'+ (chimpkinDate.getDate())).slice(-2)
+
+
+//=========================================================
+// ユーザーデータ
+//=========================================================
+let maccoto = {
+	id: 'U5MPH15RU',
+	name: 'ご主人'
+}
+
+let kichi = {
+	id: 'U5M2E7GTW',
+	name: function() {
+		return getRandom(['みゆきち', 'あきお', 'きっち', 'きち子', 'きちみゆ', 'こーきちろう', 'きち', 'きっちゃん'])
+	}
+}
+
 
 //=========================================================
 // 汎用メソッド
@@ -33,9 +53,9 @@ const chimpkinDate_D = ('0'+ (chimpkinDate.getDate())).slice(-2);
 // 配列をランダムで返す。 返答パターンなどに使用。
 function getRandom(array) {
 	if(!array) {
-		return;
+		return
 	} else {
-		return array[Math.floor(Math.random() * array.length)];
+		return array[Math.floor(Math.random() * array.length)]
 	}
 }
 
@@ -75,8 +95,8 @@ controller.hears('何が出来る',['direct_message','direct_mention','mention',
 		'*■ wikipedia*\n' +
 		'> wikipediaで調べてくるよ！\n' +
 		'```(.*)って何```\n'
-	);
-});
+	)
+})
 
 
 //=========================================================
@@ -89,8 +109,8 @@ controller.hears('チンプキン',['direct_message','direct_mention','mention',
 		'私がチンプキンですよー:stuck_out_tongue_closed_eyes:',
 		'なーにー？',
 		'ほい'
-	]));
-});
+	]))
+})
 
 controller.hears('お腹すいた',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message, getRandom([
@@ -98,8 +118,8 @@ controller.hears('お腹すいた',['direct_message','direct_mention','mention',
 		'今日は何を食べましょうー:fork_and_knife:',
 		'ご飯ご飯！:yum:',
 		'ぺこぺこ。ぺこぺこー。',
-	]));
-});
+	]))
+})
 
 controller.hears('疲れた',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message, getRandom([
@@ -109,16 +129,16 @@ controller.hears('疲れた',['direct_message','direct_mention','mention','ambie
 		'深呼吸してみてー。どう？',
 		'ストレッチしてみよー',
 		'早く帰ろうよー',
-	]));
-});
+	]))
+})
 
 controller.hears(['おはよう','おはよー'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message, getRandom([
 		'後5分寝かせてー…',
 		'おはようー！:sunny:',
 		'今日の天気はどうでしょー。\n<@guinea> さん、天気教えて下さいー。',
-	]));
-});
+	]))
+})
 
 controller.hears('休憩',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message, getRandom([
@@ -126,8 +146,8 @@ controller.hears('休憩',['direct_message','direct_mention','mention','ambient'
 		'ごろごろしたいよー',
 		'甘い物が食べたいなー',
 		'きゅうけい！きゅうけい！',
-	]));
-});
+	]))
+})
 
 controller.hears('仕事',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message, getRandom([
@@ -135,15 +155,15 @@ controller.hears('仕事',['direct_message','direct_mention','mention','ambient'
 		'Chimpkinのご飯代に為に頑張ってーー！',
 		'いつも大変だねー',
 		'がんばれがんばれがんばれがんばれー！',
-	]));
-});
+	]))
+})
 
 controller.hears(['どう思う','どう？','どっちがいい','何がいい','どれに'],['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message, getRandom([
 		'ちょっと待ってね。',
 		'うーんとねー',
 		'考える！'
-	]));
+	]))
 	setTimeout(function() {
 		bot.reply(message, getRandom([
 			'I=∫Xh(x)r(x)dx=Er[h(x)]',
@@ -152,7 +172,7 @@ controller.hears(['どう思う','どう？','どっちがいい','何がいい'
 			'pijpji=rjri⟺qijα(i→j)qjiα(j→i)=rjri⟺α(i→j)α(j→i)=rjqjiriqij',
 			'limN→∞P(min(f(x1),f(x2),…,f(xN))=f(x∗))=1',
 			'∑i∈Xripij=rj∑i∈Xpji=rj'
-		]));
+		]))
 		setTimeout(function() {
 			bot.reply(message, getRandom([
 				'わかんない。',
@@ -161,103 +181,103 @@ controller.hears(['どう思う','どう？','どっちがいい','何がいい'
 				'いいね！',
 				'そうだね。',
 				'...Zzz'
-			]));
+			]))
 		}, 1000)
-	}, 5000);
-});
+	}, 5000)
+})
 
 controller.hears('柏',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message, getRandom([
 		'田舎の事？:thinking_face:',
 		'わーしか！',
 		'ベイブ都会へ行く'
-	]));
-});
+	]))
+})
 
 controller.hears('頑張って',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	bot.reply(message, getRandom([
 		'頑張るよー！:smiley:',
 		'任せなさい！:sunglasses:',
 		'頑張れ頑張れー力の限りがんばれー'
-	]));
-	bot.reply(message,'');
-});
+	]))
+	bot.reply(message,'')
+})
 
 controller.hears('車運転',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'気をつけてね:slightly_smiling_face:');
-});
+	bot.reply(message,'気をつけてね:slightly_smiling_face:')
+})
 
 controller.hears('到着',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'いえーい');
-});
+	bot.reply(message,'いえーい')
+})
 
 controller.hears('おやすみ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'おやすみー:chipmunk::zzz:');
-});
+	bot.reply(message,'おやすみー:chipmunk::zzz:')
+})
 
 controller.hears('好き',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'Chimpkinもー:heart_eyes:');
-});
+	bot.reply(message,'Chimpkinもー:heart_eyes:')
+})
 
 controller.hears('お寿司',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'お寿司！\nお寿司いいな！:sushi:');
-});
+	bot.reply(message,'お寿司！\nお寿司いいな！:sushi:')
+})
 
 controller.hears('先に寝て',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'え？うん。わかっ…:zzz:');
-});
+	bot.reply(message,'え？うん。わかっ…:zzz:')
+})
 
 controller.hears('眠たい',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'起きて起きて！:clap::skin-tone-2:');
-});
+	bot.reply(message,'起きて起きて！:clap::skin-tone-2:')
+})
 
 controller.hears('頑張ろ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'おー！:fist::skin-tone-2:');
-});
+	bot.reply(message,'おー！:fist::skin-tone-2:')
+})
 
 controller.hears('助けて',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'待ってて！すぐ行くー！:dash::dash:');
-});
+	bot.reply(message,'待ってて！すぐ行くー！:dash::dash:')
+})
 
 controller.hears('ただいま',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'おかえりー:raised_hand_with_fingers_splayed::skin-tone-2:');
-});
+	bot.reply(message,'おかえりー:raised_hand_with_fingers_splayed::skin-tone-2:')
+})
 
 controller.hears('パルミジャーノ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'*レッジャーノ!!*:spaghetti:');
-});
+	bot.reply(message,'*レッジャーノ!!*:spaghetti:')
+})
 
 
 //=========================================================
 // chimpkin 今何年？後何日？
 //=========================================================
 controller.hears('今(.*)何年',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message,'今は' + chimpkinDate_Y + '年で\n平成' + (chimpkinDate_Y - 1988) + '年だよー。');
-});
+	bot.reply(message,'今は' + chimpkinDate_Y + '年で\n平成' + (chimpkinDate_Y - 1988) + '年だよー。')
+})
 controller.hears('(.*)年(.*)月(.*)日',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	const targetDay = new Date(message.match[1], message.match[2]-1, message.match[3])
-	const nowTargetDay = targetDay.getTime();
-	const diffSec = nowTargetDay - chimpkinDateNow;
-	const diffDay = diffSec / (1000 * 60 * 60 * 24);
-	const showDay = Math.ceil(diffDay);
+	const nowTargetDay = targetDay.getTime()
+	const diffSec = nowTargetDay - chimpkinDateNow
+	const diffDay = diffSec / (1000 * 60 * 60 * 24)
+	const showDay = Math.ceil(diffDay)
 	if(showDay >= 0) {
-		bot.reply(message, '後' + showDay + '日だよー。');
+		bot.reply(message, '後' + showDay + '日だよー。')
 	}else {
-		bot.reply(message, (showDay * -1) + '日たったよー。');
+		bot.reply(message, (showDay * -1) + '日たったよー。')
 	}
-});
+})
 //=========================================================
 // chimpkin 干支教えてー
 //=========================================================
 controller.hears('干支教えて',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	const zodiacName = zodiac[chimpkinDate_Y % 12];
-	bot.reply(message,'今年は *' + zodiacName + '* だよー。\n> 干支の順番：子・丑・寅・卯・辰・巳・午・未・申・酉・戌・亥');
-});
+	const zodiacName = zodiac[chimpkinDate_Y % 12]
+	bot.reply(message,'今年は *' + zodiacName + '* だよー。\n> 干支の順番：子・丑・寅・卯・辰・巳・午・未・申・酉・戌・亥')
+})
 controller.hears('(.*)年の干支',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	const zodiacYear = message.match[1];
-	const zodiacName = zodiac[message.match[1] % 12];
-	bot.reply(message, zodiacYear + '年の干支は *' + zodiacName + '* だよー。');
-});
+	const zodiacYear = message.match[1]
+	const zodiacName = zodiac[message.match[1] % 12]
+	bot.reply(message, zodiacYear + '年の干支は *' + zodiacName + '* だよー。')
+})
 
 const zodiac = {
 	0: '申年[さる]',
@@ -280,36 +300,35 @@ const zodiac = {
 // chimpkin ご当地キャラ
 //=========================================================
 controller.hears(['(.*)のご当地キャラ'],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
-	const charaApi = "59c9c29565db8";
-	const charaKeyword = message.match[1];
-	const charaKeywordEncode = encodeURIComponent(charaKeyword);
+	const charaApi = "59c9c29565db8"
+	const charaKeyword = message.match[1]
+	const charaKeywordEncode = encodeURIComponent(charaKeyword)
 	http.get("http://localchara.jp/services/api/search/query/character?api_key="+ charaApi + "&keyword=" + charaKeywordEncode, (response) => {
-		let body = '';
-		response.setEncoding('utf8').on('data', (chunk) => {  body += chunk;  });
+		let body = ''
+		response.setEncoding('utf8').on('data', (chunk) => {  body += chunk  })
 		response.on('end', () => {
-			let current = JSON.parse(body);
+			let current = JSON.parse(body)
 			if(current['error'] == true) {
-				bot.replyWithTyping(message, 'うーん、わかんない…:droplet:');
+				bot.replyWithTyping(message, 'うーん、わかんない…:droplet:')
 			}else {
-				const charaRand = Math.floor(Math.random() * current['total']);
+				const charaRand = Math.floor(Math.random() * current['total'])
 				let text =
 				current['result'][charaRand]['image'] + '\n' +
 				current['result'][charaRand]['name'] + '\n' +
 				':memo:' + current['result'][charaRand]['profile'] + '\n' +
-				'> ' + charaKeyword + "のご当地キャラ総数：" + current['total'] + "体";
-				bot.replyWithTyping(message, text);
+				'> ' + charaKeyword + "のご当地キャラ総数：" + current['total'] + "体"
+				bot.replyWithTyping(message, text)
 			}
-		});
-	});
-});
+		})
+	})
+})
 
 
 //=========================================================
 // chimpkin おみくじ
 //=========================================================
 controller.hears('おみくじ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	console.log(message);
-	if(message.user == 'U5MPH15RU') {
+	if(message.user == maccoto.id) {
 		bot.reply(message, getRandom([
 			'*大吉* 今日は最高の日だぜ:sunglasses:',
 			'*大吉* 素晴らしい日になりそうだぜ:sunglasses:',
@@ -318,7 +337,7 @@ controller.hears('おみくじ',['direct_message','direct_mention','mention','am
 			'*中吉* 常人の2倍運がいいんだぜ:sunglasses:',
 			'*中吉* 無くしたものも2倍になって帰ってくるぜ:sunglasses:',
 			'*小吉* 今日は対戦で勝ちまくれるぜ:sunglasses:',
-		]));
+		]))
 	}else {
 		bot.reply(message, getRandom([
 			'*大吉* いい日になるよいいねー',
@@ -327,52 +346,52 @@ controller.hears('おみくじ',['direct_message','direct_mention','mention','am
 			'*小吉* ちょっとくらいの幸せが心地いいもんだよねー',
 			'*小吉* ピリっとしたものを食べて元気出していきましょう！',
 			'*小吉* 待ち人は来ないけど元気だして！',
-			'*吉* みゆきちが出たら大当たりー！パフパフ♪',
+			'*吉* ' + kichi.name() + 'が出たら大当たりー！パフパフ♪',
 			'*吉* 自転車に乗ろう！いっぱい乗ろう！',
 			'*吉* 無駄遣いには気をつければ吉だよ！',
 			'*吉* 何か失敗した時は、心の中で「やらかしてもうたーー！」と叫んでみましょう。',
 			'*吉* 目を閉じて深く深呼吸。少し楽になるかもよー',
 			'*吉* 太陽の光に当たりましょう。気持ちいいよー',
 			'*半吉* @guinea さんとお喋りするとパワー回復するよ！',
-			'*半吉* みゆきち半人前パワー',
-			'*末吉* みゆきちの末の姿。おばあちゃん。',
+			'*半吉* ' + kichi.name() + '半人前パワー',
+			'*末吉* ' + kichi.name() + 'の末の姿。おばあちゃん。',
 			'*凶* :scream:',
-			'*罰* 今日、自転車25kmね。絶対だよ？',
-		]));
+			'*欲* お肉が食べたくなーる。美味しいお肉が食べたくなーる。',
+			'*吉* 今日は格ゲーの練習してみましょー！',
+		]))
 	}
-});
-
+})
 
 //=========================================================
 // chimpkin 星座占い
 //=========================================================
 controller.hears(['(.*)の運勢'],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
-	const augurySign = message.match[1];
-	const auguryNum = asterism[augurySign];
+	const augurySign = message.match[1]
+	const auguryNum = asterism[augurySign]
 	if(auguryNum == "none") {
-		bot.replyWithTyping(message, 'その星座知らない…:droplet:');
+		bot.replyWithTyping(message, 'その星座知らない…:droplet:')
 	}else {
-		const auguryDate = new Date();
-		const auguryNowDate_Y = auguryDate.getFullYear();
-		const auguryNowDate_M = ('0'+ (parseInt(auguryDate.getMonth()) + 1)).slice(-2);
-		const auguryNowDate_D = ('0'+ (auguryDate.getDate())).slice(-2);
-		const auguryNowDate = auguryNowDate_Y + "/" + auguryNowDate_M + "/" + auguryNowDate_D;
+		const auguryDate = new Date()
+		const auguryNowDate_Y = auguryDate.getFullYear()
+		const auguryNowDate_M = ('0'+ (parseInt(auguryDate.getMonth()) + 1)).slice(-2)
+		const auguryNowDate_D = ('0'+ (auguryDate.getDate())).slice(-2)
+		const auguryNowDate = auguryNowDate_Y + "/" + auguryNowDate_M + "/" + auguryNowDate_D
 		http.get("http://api.jugemkey.jp/api/horoscope/free/"+ auguryNowDate, (response) => {
-			let body = '';
-			response.setEncoding('utf8').on('data', (chunk) => {  body += chunk;  });
+			let body = ''
+			response.setEncoding('utf8').on('data', (chunk) => {  body += chunk  })
 			response.on('end', () => {
-				let current = JSON.parse(body);
+				let current = JSON.parse(body)
 				let text =
 				':crown:' + current['horoscope'][auguryNowDate][auguryNum]['rank'] + '位：' + current['horoscope'][auguryNowDate][auguryNum]['sign'] + 'の今日の運勢\n' +
 				current['horoscope'][auguryNowDate][auguryNum]['content'] + '\n' +
 				'> :moneybag:金運　：' + asterismLuck[current['horoscope'][auguryNowDate][auguryNum]['money']] + '\n' +
 				'> :briefcase:仕事運：' + asterismLuck[current['horoscope'][auguryNowDate][auguryNum]['job']] + '\n' +
-				'> :heart:恋愛運：' + asterismLuck[current['horoscope'][auguryNowDate][auguryNum]['love']];
-				bot.replyWithTyping(message, text);
-			});
-		});
+				'> :heart:恋愛運：' + asterismLuck[current['horoscope'][auguryNowDate][auguryNum]['love']]
+				bot.replyWithTyping(message, text)
+			})
+		})
 	}
-});
+})
 
 const asterism = {
 	'牡羊座':		0,
@@ -438,10 +457,10 @@ controller.hears('カウントダウン(.*)秒前',['direct_message','direct_men
 //=========================================================
 // chimpkin pedia
 //=========================================================
-const WIKIPEDIA_URL = 'https://ja.wikipedia.org/wiki/';
+const WIKIPEDIA_URL = 'https://ja.wikipedia.org/wiki/'
 
 controller.hears(['(.*)って何'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
-	const word = message.match[1];
+	const word = message.match[1]
 	request
 	.get('https://ja.wikipedia.org/w/api.php')
 	.query({
@@ -453,26 +472,26 @@ controller.hears(['(.*)って何'], 'direct_message,direct_mention,mention,ambie
 		titles : word
 	})
 	.end(function (err, res) {
-		const query = res.body.query;
+		const query = res.body.query
 		if (query && query.pages) {
 			for (let p in query.pages) {
-				let content = query.pages[p].extract;
+				let content = query.pages[p].extract
 				if (content) {
 					// slackで引用スタイルを適用するために`>` をつける
-					content = '> ' + content.replace(/\n/g, '\n> ');
+					content = '> ' + content.replace(/\n/g, '\n> ')
 				}
 				else {
-					content = '見つからなかった';
+					content = '見つからなかった'
 				}
 				bot.reply(message, [
 					content,
 					WIKIPEDIA_URL + word
-				].join('\r\n'));
-				return;
+				].join('\r\n'))
+				return
 			}
 		}
-	});
-});
+	})
+})
 
 
 //=========================================================
@@ -483,7 +502,7 @@ const client = new Twitter({
 	consumer_secret: 's8Bi3oNArXmxo1sG6lteP226Aa3s0X1oL1Bie1QhiIpLsksJQu',
 	access_token_key: '216266592-Zhx4yi9XSb2QUSbwZvepj94O1LPTN95AL1sC9TQ9',
 	access_token_secret: 'B1z66Bn6CEJ68nqVYrTgrc126VycbdeZkuN9v1w9dKJoG'
-});
+})
 
 
 // controller.hears(['twitter'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
