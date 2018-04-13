@@ -46,6 +46,9 @@ let kichi = {
 	id: 'U5M2E7GTW',
 	name: function() {
 		return getRandom(['みゆきち', 'あきお', 'きっち', 'きち子', 'きちみゆ', 'こーきちろう', 'きち', 'きっちゃん'])
+	},
+	sanukiDiner: function() {
+		return getRandom(['日高屋', '木屋', '四季亭', '四季蕎麦', 'カリカ', '紅光', 'Grano', 'サガル'])
 	}
 }
 
@@ -118,18 +121,37 @@ controller.hears('チンプキン',['direct_message','direct_mention','mention',
 controller.hears('お腹すいた',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	if(message.user == maccoto.id) {
 		bot.reply(message, getRandom([
-			'食べる？これ！:apple:',
-			'今日は何を食べましょうー:fork_and_knife:',
+			maccoto.name + '食べる？:apple:',
+			'500kcal以内だよー、絶対だよー。',
 			'ご飯ご飯！:yum:',
 			'ぺこぺこ。ぺこぺこー。',
 			maccoto.name + '！' + maccoto.likeRamen() + 'なんていかがでしょう！！',
 		]))
 	}else {
 		bot.reply(message, getRandom([
-			'食べる？これ！:apple:',
-			'今日は何を食べましょうー:fork_and_knife:',
-			'ご飯ご飯！:yum:',
+			kichi.name() + 'も食べる？:apple:',
+			'減塩だよ！' + kichi.name(),
+			'食べて帰るー？:yum:',
 			'ぺこぺこ。ぺこぺこー。',
+		]))
+	}
+})
+
+controller.hears('佐貫で食べ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	if(message.user == maccoto.id) {
+		// bot.reply(message, getRandom([
+		// 	maccoto.name + '食べる？:apple:',
+		// 	'500kcal以内だよー、絶対だよー。',
+		// 	'ご飯ご飯！:yum:',
+		// 	'ぺこぺこ。ぺこぺこー。',
+		// 	maccoto.name + '！' + maccoto.likeRamen() + 'なんていかがでしょう！！',
+		// ]))
+	}else {
+		bot.reply(message, getRandom([
+			kichi.sanukiDiner() + 'なんてどう？？',
+			'んー、' + kichi.sanukiDiner() + 'は？',
+			'じゃあ、' + kichi.sanukiDiner() + 'とかどうどう？',
+			'なら、' + kichi.sanukiDiner() + 'でしょ！' + kichi.name()
 		]))
 	}
 })
@@ -213,7 +235,6 @@ controller.hears('頑張って',['direct_message','direct_mention','mention','am
 		'任せなさい！:sunglasses:',
 		'頑張れ頑張れー力の限りがんばれー'
 	]))
-	bot.reply(message,'')
 })
 
 controller.hears('車運転',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
