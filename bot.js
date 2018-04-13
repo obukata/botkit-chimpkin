@@ -36,7 +36,10 @@ const chimpkinDate_D = ('0'+ (chimpkinDate.getDate())).slice(-2)
 //=========================================================
 let maccoto = {
 	id: 'U5MPH15RU',
-	name: 'ご主人'
+	name: 'ご主人',
+	likeRamen: function() {
+		return getRandom(['河童ラーメン', '天下一品', '中華そば 葛', 'ふく流ラパス 分家 ワダチ', '鶏Soba 座銀'])
+	}
 }
 
 let kichi = {
@@ -113,12 +116,22 @@ controller.hears('チンプキン',['direct_message','direct_mention','mention',
 })
 
 controller.hears('お腹すいた',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message, getRandom([
-		'食べる？これ！:apple:',
-		'今日は何を食べましょうー:fork_and_knife:',
-		'ご飯ご飯！:yum:',
-		'ぺこぺこ。ぺこぺこー。',
-	]))
+	if(message.user == maccoto.id) {
+		bot.reply(message, getRandom([
+			'食べる？これ！:apple:',
+			'今日は何を食べましょうー:fork_and_knife:',
+			'ご飯ご飯！:yum:',
+			'ぺこぺこ。ぺこぺこー。',
+			maccoto.name() + '！' + maccoto.likeRamen() + 'なんていかがでしょう！！',
+		]))
+	}else {
+		bot.reply(message, getRandom([
+			'食べる？これ！:apple:',
+			'今日は何を食べましょうー:fork_and_knife:',
+			'ご飯ご飯！:yum:',
+			'ぺこぺこ。ぺこぺこー。',
+		]))
+	}
 })
 
 controller.hears('疲れた',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
@@ -330,6 +343,12 @@ controller.hears(['(.*)のご当地キャラ'],["direct_message","direct_mention
 controller.hears('おみくじ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	if(message.user == maccoto.id) {
 		bot.reply(message, getRandom([
+			'*大吉* 今日はダブルエリアルがよく来まるぜ:sunglasses:',
+			'*大吉* ' + kichi.name() + 'が' + maccoto.name() ' に美味しいもの食べさせてくれるぜ！ :sunglasses:',
+			'*大吉* ' + maccoto.name() + '、今日も最高だぜ:sunglasses:',
+			'*大吉* どれだけ食べても太らない気がするぜ:sunglasses:',
+			'*大吉* 今日のラッキーラーメンは' + maccoto.likeRamen() + 'だぜ:sunglasses:',
+			'*大吉* どれだけごろごろしても怒られないぜ:sunglasses:',
 			'*大吉* 今日は最高の日だぜ:sunglasses:',
 			'*大吉* 素晴らしい日になりそうだぜ:sunglasses:',
 			'*大吉* awesomeだぜ:sunglasses:',
