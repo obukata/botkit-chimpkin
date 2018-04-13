@@ -344,7 +344,7 @@ controller.hears('おみくじ',['direct_message','direct_mention','mention','am
 	if(message.user == maccoto.id) {
 		bot.reply(message, getRandom([
 			'*大吉* 今日はダブルエリアルがよく来まるぜ:sunglasses:',
-			'*大吉* ' + kichi.name() + 'が' + maccoto.name() ' に美味しいもの食べさせてくれるぜ！ :sunglasses:',
+			'*大吉* ' + kichi.name() + 'が' + maccoto.name() + ' に美味しいもの食べさせてくれるぜ！ :sunglasses:',
 			'*大吉* ' + maccoto.name() + '、今日も最高だぜ:sunglasses:',
 			'*大吉* どれだけ食べても太らない気がするぜ:sunglasses:',
 			'*大吉* 今日のラッキーラーメンは' + maccoto.likeRamen() + 'だぜ:sunglasses:',
