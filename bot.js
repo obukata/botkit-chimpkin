@@ -281,6 +281,10 @@ controller.hears('パルミジャーノ',['direct_message','direct_mention','men
 	bot.reply(message,'*レッジャーノ!!*:spaghetti:')
 })
 
+controller.hears('ねずみ食べる',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	bot.reply(message,'僕…ねずみじゃないよ:fearful:')
+})
+
 
 //=========================================================
 // chimpkin 今何年？後何日？
