@@ -37,18 +37,19 @@ const chimpkinDate_D = ('0'+ (chimpkinDate.getDate())).slice(-2)
 let maccoto = {
 	id: 'U5MPH15RU',
 	name: 'ご主人',
-	likeRamen: function() {
-		return getRandom(['河童ラーメン', '天下一品', '中華そば 葛', 'ふく流ラパス 分家 ワダチ', '鶏Soba 座銀'])
+	birthday: '20180828',
+	like: {
+		Ramen: ['河童ラーメン', '天下一品', '中華そば 葛', 'ふく流ラパス 分家 ワダチ', '鶏Soba 座銀']
 	}
 }
 
 let kichi = {
 	id: 'U5M2E7GTW',
-	name: function() {
-		return getRandom(['みゆきち', 'あきお', 'きっち', 'きち子', 'きちみゆ', 'こーきちろう', 'きち', 'きっちゃん'])
-	},
-	sanukiDiner: function() {
-		return getRandom(['日高屋', '木屋', '四季亭', '四季蕎麦', 'カリカ', '紅光', 'Grano', 'サガル'])
+	name: ['みゆきち', 'あきお', 'きっち', 'きち子', 'きちみゆ', 'こーきちろう', 'きち', 'きっちゃん'],
+	like: {
+		sanuki: {
+			dinner: ['日高屋', '木屋', '四季亭', '四季蕎麦', 'カリカ', '紅光', 'Grano', 'サガル', 'しちりん']
+		}
 	}
 }
 
@@ -125,12 +126,12 @@ controller.hears('お腹すいた',['direct_message','direct_mention','mention',
 			'500kcal以内だよー、絶対だよー。',
 			'ご飯ご飯！:yum:',
 			'ぺこぺこ。ぺこぺこー。',
-			maccoto.name + '！' + maccoto.likeRamen() + 'なんていかがでしょう！！',
+			maccoto.name + '！' + getRandom(maccoto.like.ramen) + 'なんていかがでしょう！！',
 		]))
 	}else {
 		bot.reply(message, getRandom([
-			kichi.name() + 'も食べる？:apple:',
-			'減塩だよ！' + kichi.name(),
+			getRandom(kichi.name) + 'も食べる？:apple:',
+			'減塩だよ！' + getRandom(kichi.name),
 			'食べて帰るー？:yum:',
 			'ぺこぺこ。ぺこぺこー。',
 		]))
@@ -139,19 +140,13 @@ controller.hears('お腹すいた',['direct_message','direct_mention','mention',
 
 controller.hears('佐貫で食べ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	if(message.user == maccoto.id) {
-		// bot.reply(message, getRandom([
-		// 	maccoto.name + '食べる？:apple:',
-		// 	'500kcal以内だよー、絶対だよー。',
-		// 	'ご飯ご飯！:yum:',
-		// 	'ぺこぺこ。ぺこぺこー。',
-		// 	maccoto.name + '！' + maccoto.likeRamen() + 'なんていかがでしょう！！',
-		// ]))
+
 	}else {
 		bot.reply(message, getRandom([
-			kichi.sanukiDiner() + 'なんてどう？？',
-			'んー、' + kichi.sanukiDiner() + 'は？',
-			'じゃあ、' + kichi.sanukiDiner() + 'とかどうどう？',
-			'なら、' + kichi.sanukiDiner() + 'でしょ！' + kichi.name()
+			getRandom(kichi.like.sanuki.dinner) + 'なんてどう？？',
+			'んー、' + getRandom(kichi.like.sanuki.dinner) + 'は？',
+			'じゃあ、' + getRandom(kichi.like.sanuki.dinner) + 'とかどうどう？',
+			'なら、' + getRandom(kichi.like.sanuki.dinner) + 'でしょ！' + getRandom(kichi.name)
 		]))
 	}
 })
@@ -369,10 +364,10 @@ controller.hears('おみくじ',['direct_message','direct_mention','mention','am
 	if(message.user == maccoto.id) {
 		bot.reply(message, getRandom([
 			'*大吉* 今日はダブルエリアルがよく来まるぜ:sunglasses:',
-			'*大吉* ' + kichi.name() + 'が' + maccoto.name + 'に美味しいもの食べさせてくれるぜ！ :sunglasses:',
+			'*大吉* ' + getRandom(kichi.name) + 'が' + maccoto.name + 'に美味しいもの食べさせてくれるぜ！ :sunglasses:',
 			'*大吉* ' + maccoto.name + '、今日も最高だぜ:sunglasses:',
 			'*大吉* どれだけ食べても太らない気がするぜ:sunglasses:',
-			'*大吉* 今日のラッキーラーメンは' + maccoto.likeRamen() + 'だぜ:sunglasses:',
+			'*大吉* 今日のラッキーラーメンは' + getRandom(maccoto.like.ramen) + 'だぜ:sunglasses:',
 			'*大吉* どれだけごろごろしても怒られないぜ:sunglasses:',
 			'*大吉* 今日は最高の日だぜ:sunglasses:',
 			'*大吉* 素晴らしい日になりそうだぜ:sunglasses:',
@@ -390,15 +385,15 @@ controller.hears('おみくじ',['direct_message','direct_mention','mention','am
 			'*小吉* ちょっとくらいの幸せが心地いいもんだよねー',
 			'*小吉* ピリっとしたものを食べて元気出していきましょう！',
 			'*小吉* 待ち人は来ないけど元気だして！',
-			'*吉* ' + kichi.name() + 'が出たら大当たりー！パフパフ♪',
+			'*吉* ' + getRandom(kichi.name) + 'が出たら大当たりー！パフパフ♪',
 			'*吉* 自転車に乗ろう！いっぱい乗ろう！',
 			'*吉* 無駄遣いには気をつければ吉だよ！',
 			'*吉* 何か失敗した時は、心の中で「やらかしてもうたーー！」と叫んでみましょう。',
 			'*吉* 目を閉じて深く深呼吸。少し楽になるかもよー',
 			'*吉* 太陽の光に当たりましょう。気持ちいいよー',
 			'*半吉* @guinea さんとお喋りするとパワー回復するよ！',
-			'*半吉* ' + kichi.name() + '半人前パワー',
-			'*末吉* ' + kichi.name() + 'の末の姿。おばあちゃん。',
+			'*半吉* ' + getRandom(kichi.name) + '半人前パワー',
+			'*末吉* ' + getRandom(kichi.name) + 'の末の姿。おばあちゃん。',
 			'*凶* :scream:',
 			'*欲* お肉が食べたくなーる。美味しいお肉が食べたくなーる。',
 			'*吉* 今日は格ゲーの練習してみましょー！',
