@@ -39,7 +39,7 @@ let maccoto = {
 	name: 'ご主人',
 	birthday: '20180828',
 	like: {
-		Ramen: ['河童ラーメン', '天下一品', '中華そば 葛', 'ふく流ラパス 分家 ワダチ', '鶏Soba 座銀']
+		ramen: ['河童ラーメン', '天下一品', '中華そば 葛', 'ふく流ラパス 分家 ワダチ', '鶏Soba 座銀']
 	}
 }
 
@@ -363,19 +363,19 @@ controller.hears(['(.*)のご当地キャラ'],["direct_message","direct_mention
 controller.hears('おみくじ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 	if(message.user == maccoto.id) {
 		bot.reply(message, getRandom([
-			'*大吉* 今日はダブルエリアルがよく来まるぜ:sunglasses:',
-			'*大吉* ' + getRandom(kichi.name) + 'が' + maccoto.name + 'に美味しいもの食べさせてくれるぜ！ :sunglasses:',
-			'*大吉* ' + maccoto.name + '、今日も最高だぜ:sunglasses:',
-			'*大吉* どれだけ食べても太らない気がするぜ:sunglasses:',
+			// '*大吉* 今日はダブルエリアルがよく来まるぜ:sunglasses:',
+			// '*大吉* ' + getRandom(kichi.name) + 'が' + maccoto.name + 'に美味しいもの食べさせてくれるぜ！ :sunglasses:',
+			// '*大吉* ' + maccoto.name + '、今日も最高だぜ:sunglasses:',
+			// '*大吉* どれだけ食べても太らない気がするぜ:sunglasses:',
 			'*大吉* 今日のラッキーラーメンは' + getRandom(maccoto.like.ramen) + 'だぜ:sunglasses:',
-			'*大吉* どれだけごろごろしても怒られないぜ:sunglasses:',
-			'*大吉* 今日は最高の日だぜ:sunglasses:',
-			'*大吉* 素晴らしい日になりそうだぜ:sunglasses:',
-			'*大吉* awesomeだぜ:sunglasses:',
-			'*大吉* 何事もうまく行くんだぜ:sunglasses:',
-			'*中吉* 常人の2倍運がいいんだぜ:sunglasses:',
-			'*中吉* 無くしたものも2倍になって帰ってくるぜ:sunglasses:',
-			'*小吉* 今日は対戦で勝ちまくれるぜ:sunglasses:',
+			// '*大吉* どれだけごろごろしても怒られないぜ:sunglasses:',
+			// '*大吉* 今日は最高の日だぜ:sunglasses:',
+			// '*大吉* 素晴らしい日になりそうだぜ:sunglasses:',
+			// '*大吉* awesomeだぜ:sunglasses:',
+			// '*大吉* 何事もうまく行くんだぜ:sunglasses:',
+			// '*中吉* 常人の2倍運がいいんだぜ:sunglasses:',
+			// '*中吉* 無くしたものも2倍になって帰ってくるぜ:sunglasses:',
+			// '*小吉* 今日は対戦で勝ちまくれるぜ:sunglasses:',
 		]))
 	}else {
 		bot.reply(message, getRandom([
