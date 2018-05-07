@@ -1,3 +1,19 @@
+//=========================================================
+//
+// チンプキン今後の方向性
+//
+// ---
+// 
+// 1.会話。何かを聞いてきて、それに答えるとどうこう。
+// 
+// 2.googleの各種apiとの連携
+//
+// 3.ユーザーデータを「google spreadsheet」にて管理
+//
+// 4.controller.hears 何回も呼び出したほうがいいのか、
+//   1回でいろんなifを通したほうがいいのか…。
+//
+//=========================================================
 const Botkit = require('botkit')
 const http = require('http')
 const request = require('superagent')
@@ -37,7 +53,7 @@ const chimpkinDate_D = ('0'+ (chimpkinDate.getDate())).slice(-2)
 let maccoto = {
 	id: 'U5MPH15RU',
 	name: 'ご主人',
-	birthday: '20180828',
+	birthday: '19880828',
 	like: {
 		ramen: ['河童ラーメン', '天下一品', '中華そば 葛', 'ふく流ラパス 分家 ワダチ', '鶏Soba 座銀']
 	}
@@ -46,6 +62,7 @@ let maccoto = {
 let kichi = {
 	id: 'U5M2E7GTW',
 	name: ['みゆきち', 'あきお', 'きっち', 'きち子', 'きちみゆ', 'こーきちろう', 'きち', 'きっちゃん'],
+	birthday: '19801226',
 	like: {
 		sanuki: {
 			dinner: ['日高屋', '木屋', '四季亭', '四季蕎麦', 'カリカ', '紅光', 'Grano', 'サガル', 'しちりん']
@@ -543,6 +560,16 @@ const client = new Twitter({
 	access_token_secret: 'B1z66Bn6CEJ68nqVYrTgrc126VycbdeZkuN9v1w9dKJoG'
 })
 
+
+//=========================================================
+// 会話の振り分け1つにしちゃう？
+//=========================================================
+// controller.hears('(.*)？',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+// 	const pickMessage = message.match[1]
+// 	if(str.match('誕生日')) {
+
+// 	}
+// })
 
 // controller.hears(['twitter'], 'direct_message,direct_mention,mention,ambient', function (bot, message) {
 // 		bot.say({
