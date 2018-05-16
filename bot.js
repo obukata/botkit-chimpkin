@@ -47,15 +47,16 @@ controller.spawn({
 var load = function(path, file) {
 	var ext = Path.extname(file)
 	var full = Path.join(path, Path.basename(file, ext))
-
-	try {
-		var script = require(full)
-		if (typeof script === 'function') {
-			script(this)
+	if(file.match('.js')) {
+		try {
+			var script = require(full)
+			if (typeof script === 'function') {
+				script(this)
+			}
+		}catch(error) {
+			console.log(error)
+			process.exit(1)
 		}
-	}catch(error) {
-		console.log(error)
-		process.exit(1)
 	}
 }
 
