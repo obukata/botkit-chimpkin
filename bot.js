@@ -43,25 +43,34 @@ controller.spawn({
 	}
 })
 
+// var load = function(path, file) {
+// 	var ext = Path.extname(file)
+// 	var full = Path.join(path, Path.basename(file, ext))
+// 	if(file.match('.js')) {
+// 		try {
+// 			var script = require(full)
+// 			if (typeof script === 'function') {
+// 				script(this)
+// 			}
+// 		}catch(error) {
+// 			console.log(error)
+// 			process.exit(1)
+// 		}
+// 	}
+// }
 
-var load = function(path, file) {
-	var ext = Path.extname(file)
-	var full = Path.join(path, Path.basename(file, ext))
-	if(file.match('.js')) {
-		try {
-			var script = require(full)
-			if (typeof script === 'function') {
-				script(this)
-			}
-		}catch(error) {
-			console.log(error)
-			process.exit(1)
+// var path = Path.resolve('.', 'module')
+
+// Fs.readdirSync(path).sort().forEach(function(file) {
+// 	load(path, file)
+// })
+
+const pluginsPath = Path.resolve(__dirname, 'module');
+Fs.readdir(pluginsPath, (err, list) => {
+	for (const file of list) {
+		if(file.match('.js')) {
+			const pluginPath = Path.resolve(pluginsPath, file);
+			require(pluginPath)(controller);
 		}
 	}
-}
-
-var path = Path.resolve('.', 'module')
-
-Fs.readdirSync(path).sort().forEach(function(file) {
-	load(path, file)
-})
+});
