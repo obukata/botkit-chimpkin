@@ -5,8 +5,10 @@
 // ---
 // 
 // 1.会話。何かを聞いてきて、それに答えるとどうこう。
+//   （ん？対話する事で何したいの？具体的な案でるまで保留）
 // 
 // 2.googleの各種apiとの連携
+//   やっぱこれっしょ。
 //
 // 3.ユーザーデータを「google spreadsheet」にて管理
 //
@@ -18,6 +20,7 @@ const Botkit = require('botkit')
 const http = require('http')
 const request = require('superagent')
 const Twitter = require('twitter')
+const Spreadsheet = require('edit-google-spreadsheet');
 
 if (!process.env.token) {
 	console.log('Error: Specify token in environment')
@@ -560,6 +563,65 @@ const client = new Twitter({
 	access_token_secret: 'B1z66Bn6CEJ68nqVYrTgrc126VycbdeZkuN9v1w9dKJoG'
 })
 
+
+//=========================================================
+// chimpkin spreadSheet
+//=========================================================
+
+// Spreadsheet.load({
+// 	debug: true,
+// 	spreadsheetName: 'bot - test',
+// 	worksheetName: 'sheet1',
+// 	oauth2: {
+// 		client_id: "337178720760-lqhpt0prloev459k3lq0b8jo6s3ilcc0.apps.googleusercontent.com",
+// 		client_secret: "dtnk0VQgtLaqlwUIu7038zCX",
+// 		refresh_token: 'token generated with get_oauth2_permission.js'
+// 	}
+// }, function sheetReady(err, spreadsheet) {
+// 	console.log("on")
+
+//     spreadsheet.add({ 3: { 5: "hello!" } });
+ 
+//     spreadsheet.send(function(err) {
+//       if(err) throw err;
+//       console.log("Updated Cell at row 3, column 5 to 'hello!'");
+//     });
+// });
+
+//=========================================================
+// 対話テスト
+//=========================================================
+// controller.hears(['選んで'], 'direct_message,direct_mention,mention', function (bot, message) {
+// 	bot.reply(message, 'かしこまった！');
+// 	// 会話を開始します。
+// 	bot.startConversation(message, function (err, convo) {
+// 		// convo.ask() で質問をします。
+// 		convo.ask('どれから選びましょー。\n`A,B,C`みたいに、`,`で区切って教えてちょ', [
+// 			{
+// 				pattern: '醤油', // マッチさせる単語
+// 				callback: function (response, convo) {
+// 					// ▼ マッチした時の処理 ▼
+// 					convo.say('正解！:ok_woman:\n醤油！これぞ王道！:+1:'); // convo.say()で発言をします。
+// 					convo.next(); // convo.next()で、会話を次に進めます。通常は、会話が終了します。
+// 				}
+// 			},{
+// 				pattern: '味噌',
+// 				callback: function (response, convo) {
+// 					convo.say('正解！:ok_woman:\n寒いと味噌たべたくなります！:+1:');
+// 					convo.next();
+// 				}
+// 			},{
+// 				default: true,
+// 				callback: function (response, convo) {
+// 					// ▼ どのパターンにもマッチしない時の処理 ▼
+// 					convo.say('うーん、おしいです！:no_good:');
+// 					convo.repeat(); // convo.repeat()で、質問を繰り返します。
+// 					convo.next(); // 会話を次に進めます。この場合、最初の質問にも戻ります。
+// 				}
+// 			}
+// 		]);
+// 	})
+// });
 
 //=========================================================
 // 会話の振り分け1つにしちゃう？
