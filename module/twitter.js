@@ -3,7 +3,6 @@
 // chimpkin twitter
 //
 //=========================================================
-const Twitter = require('twitter')
 
 const client = new Twitter({
 	consumer_key: 'asvFVimT2yR3Aj4kyb8OmwtF9',

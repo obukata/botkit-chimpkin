@@ -5,7 +5,7 @@
 //=========================================================
 
 // 配列をランダムで返す。 返答パターンなどに使用。
-function getRandom(array) {
+getRandom = function(array) {
 	if(!array) {
 		return
 	} else {
