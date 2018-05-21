@@ -3,7 +3,7 @@
 // chimpkin 星座占い
 //
 //=========================================================
-'use strict';
+'use strict'
 module.exports = controller => {
 
 	controller.hears(['(.*)の運勢'],["direct_message","direct_mention","mention","ambient"],function(bot,message) {

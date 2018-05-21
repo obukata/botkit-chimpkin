@@ -3,7 +3,7 @@
 // チンプキン ヘルプ
 //
 //=========================================================
-'use strict';
+'use strict'
 module.exports = controller => {
 
 	controller.hears('何が出来る',['direct_message','direct_mention','mention','ambient'],function(bot,message) {

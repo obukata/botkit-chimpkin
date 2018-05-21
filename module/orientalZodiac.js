@@ -3,7 +3,7 @@
 // chimpkin 干支教えてー
 //
 //=========================================================
-'use strict';
+'use strict'
 module.exports = controller => {
 
 	controller.hears('干支教えて',['direct_message','direct_mention','mention','ambient'],function(bot,message) {

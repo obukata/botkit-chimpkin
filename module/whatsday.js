@@ -3,7 +3,7 @@
 // chimpkin 今何年？後何日？
 //
 //=========================================================
-'use strict';
+'use strict'
 module.exports = controller => {
 
 	controller.hears('今(.*)何年',['direct_message','direct_mention','mention','ambient'],function(bot,message) {

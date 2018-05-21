@@ -3,7 +3,7 @@
 // chimpkin ご当地キャラ
 //
 //=========================================================
-'use strict';
+'use strict'
 module.exports = controller => {
 
 	controller.hears(['(.*)のご当地キャラ'],["direct_message","direct_mention","mention","ambient"],function(bot,message) {

@@ -3,11 +3,11 @@
 // 汎用的メソッド
 //
 //=========================================================
-'use strict';
+'use strict'
 module.exports = controller => {
 
 	// 配列をランダムで返す。 返答パターンなどに使用。
-	let getRandom = function(array) {
+	global.getRandom = function(array) {
 		if(!array) {
 			return
 		} else {

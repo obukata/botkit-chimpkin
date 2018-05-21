@@ -3,8 +3,7 @@
 // チンプキン 簡易会話
 //
 //=========================================================
-
-'use strict';
+'use strict'
 module.exports = controller => {
 
 	controller.hears('チンプキン',['direct_message','direct_mention','mention','ambient'],function(bot,message) {

@@ -3,7 +3,7 @@
 // chimpkin おみくじ
 //
 //=========================================================
-'use strict';
+'use strict'
 module.exports = controller => {
 
 	controller.hears('おみくじ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {

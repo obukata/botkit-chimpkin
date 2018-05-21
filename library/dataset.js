@@ -3,10 +3,10 @@
 // ユーザーデータ
 //
 //=========================================================
-'use strict';
+'use strict'
 module.exports = controller => {
 
-	let maccoto = {
+	global.maccoto = {
 		id: 'U5MPH15RU',
 		name: 'ご主人',
 		birthday: '19880828',
@@ -15,7 +15,7 @@ module.exports = controller => {
 		}
 	}
 
-	let kichi = {
+	global.kichi = {
 		id: 'U5M2E7GTW',
 		name: ['みゆきち', 'あきお', 'きっち', 'きち子', 'きちみゆ', 'こーきちろう', 'きち', 'きっちゃん'],
 		birthday: '19801226',

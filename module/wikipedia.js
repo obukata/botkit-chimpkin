@@ -3,7 +3,7 @@
 // chimpkin pedia
 //
 //=========================================================
-'use strict';
+'use strict'
 module.exports = controller => {
 
 	const WIKIPEDIA_URL = 'https://ja.wikipedia.org/wiki/'
