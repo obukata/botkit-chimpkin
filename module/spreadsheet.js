@@ -33,7 +33,8 @@ module.exports = controller => {
 					var cell = cells[0]
 					// console.log('Cell R'+cell.row+'C'+cell.col+' = '+cell.value)
 					let text = 'やることリスト！\n'
-					for(let i = 0; cells[i].value; i++) {
+					let i = 0
+					for(i; cells[i].value; i++) {
 						text += i + 1 + '. ' + cells[i].value + '\n'
 					}
 					// console.log(cells[i].value)
@@ -63,8 +64,8 @@ module.exports = controller => {
 					for(i; cells[i].value; i++) {}
 					let maxCell = i
 					cells[i].value = todoAdd
+					cells[i].save()
 					bot.reply(message, '「' + todoAdd + '」' + 'を追加したよー。')
-					// sheet.bulkUpdateCells(cells) //async
 				})
 			})
 		})
