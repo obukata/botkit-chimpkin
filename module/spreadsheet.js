@@ -37,7 +37,7 @@ module.exports = controller => {
 						text += i + 1 + '. ' + cells[i].value + '\n'
 					}
 					// console.log(cells[i].value)
-					// cells[i].value = 'タスク' + (i + 1)
+					cells[i].value = 'タスク' + (i + 1)
 					// console.log(text)
 					bot.reply(message, text)
 					// sheet.bulkUpdateCells(cells) //async
