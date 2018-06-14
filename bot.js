@@ -21,9 +21,10 @@ Botkit = require('botkit')
 http = require('http')
 request = require('superagent')
 Twitter = require('twitter')
-Spreadsheet = require('edit-google-spreadsheet')
 Fs = require('fs')
 Path = require('path')
+GoogleSpreadsheet = require('google-spreadsheet')
+async = require('async')
 
 if (!process.env.token) {
 	console.log('Error: Specify token in environment')

@@ -28,5 +28,7 @@ storage_bot_db
 # Node.jsモジュールのディレクトリは無視
 node_modules
 
-# 起動コマンドファイル
+# tokenとか載せたらいかんやつね。
 boot-command
+googleapi
+client_secret.json
