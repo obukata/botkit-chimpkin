@@ -181,6 +181,21 @@ module.exports = controller => {
 		bot.reply(message,'！！')
 	})
 
+	controller.hears('誕生日おめでとう',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+		if(chimpkinDate_Y + chimpkinDate_M + chimpkinDate_D == chimpkin.birth.year + chimpkin.birth.month + chimpkin.birth.day) {
+			bot.reply(message, 'ありがとうー:risu:\n今年で' + chimpkinDate_Y - chimpkin.birth.year + '歳になったよー。')
+		}else {
+			bot.reply(message, '今日じゃないんですけど:angry:')
+		}
+	})
+
+	controller.hears(['誕生日いつ', '誕生日って', '誕生日何'],['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+		bot.reply(message, chimpkin.birth.month + '月' + chimpkin.birth.day + '日だよ\nプレゼントくれるの？？:gift:' )
+	})
+
+	controller.hears(['何歳', 'いくつになったの', 'いくつになったん', '年齢は'],['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+		bot.reply(message, chimpkinDate_Y - chimpkin.birth.year + '歳:risu:')
+	})
 
 //=========================================================
 // 会話の振り分け1つにしちゃう？
