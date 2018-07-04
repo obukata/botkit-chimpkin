@@ -6,7 +6,7 @@
 'use strict'
 module.exports = controller => {
 
-	controller.hears('チンプキン',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('チンプキン', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message, getRandom([
 			'はーいー:hand::skin-tone-2:',
 			'何か呼んだ？:chipmunk:',
@@ -16,7 +16,7 @@ module.exports = controller => {
 		]))
 	})
 
-	controller.hears('お腹すいた',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('お腹すいた', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		if(message.user == maccoto.id) {
 			bot.reply(message, getRandom([
 				maccoto.name + '食べる？:apple:',
@@ -35,7 +35,7 @@ module.exports = controller => {
 		}
 	})
 
-	controller.hears('佐貫で食べ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('佐貫で食べ', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		if(message.user == maccoto.id) {
 
 		}else {
@@ -48,7 +48,7 @@ module.exports = controller => {
 		}
 	})
 
-	controller.hears('疲れた',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('疲れた', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message, getRandom([
 			'ひまわりの種でも食べる？',
 			'一休みしましょー:slightly_smiling_face:',
@@ -67,7 +67,7 @@ module.exports = controller => {
 		]))
 	})
 
-	controller.hears('休憩',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('休憩', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message, getRandom([
 			'一休み一休み♪',
 			'ごろごろしたいよー',
@@ -76,7 +76,7 @@ module.exports = controller => {
 		]))
 	})
 
-	controller.hears('仕事',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('仕事', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message, getRandom([
 			'フレーフレー:crossed_flags:',
 			'Chimpkinのご飯代に為に頑張ってーー！',
@@ -85,7 +85,7 @@ module.exports = controller => {
 		]))
 	})
 
-	controller.hears(['どう思う','どう？','どっちがいい','何がいい','どれに'],['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears(['どう思う','どう？','どっちがいい','何がいい','どれに'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message, getRandom([
 			'ちょっと待ってね。',
 			'うーんとねー',
@@ -113,7 +113,7 @@ module.exports = controller => {
 		}, 5000)
 	})
 
-	controller.hears('柏',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('柏', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message, getRandom([
 			'田舎の事？:thinking_face:',
 			'わーしか！',
@@ -121,7 +121,7 @@ module.exports = controller => {
 		]))
 	})
 
-	controller.hears('頑張って',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('頑張って', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message, getRandom([
 			'頑張るよー！:smiley:',
 			'任せなさい！:sunglasses:',
@@ -129,59 +129,59 @@ module.exports = controller => {
 		]))
 	})
 
-	controller.hears('車運転',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('車運転', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message,'気をつけてね:slightly_smiling_face:')
 	})
 
-	controller.hears('到着',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('到着', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message,'いえーい')
 	})
 
-	controller.hears('おやすみ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('おやすみ', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message,'おやすみー:chipmunk::zzz:')
 	})
 
-	controller.hears('好き',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('好き', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message,'Chimpkinもー:heart_eyes:')
 	})
 
-	controller.hears('お寿司',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('お寿司', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message,'お寿司！\nお寿司いいな！:sushi:')
 	})
 
-	controller.hears('先に寝て',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('先に寝て', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message,'え？うん。わかっ…:zzz:')
 	})
 
-	controller.hears('眠たい',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('眠たい', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message,'起きて起きて！:clap::skin-tone-2:')
 	})
 
-	controller.hears('頑張ろ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('頑張ろ', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message,'おー！:fist::skin-tone-2:')
 	})
 
-	controller.hears('助けて',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('助けて', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message,'待ってて！すぐ行くー！:dash::dash:')
 	})
 
-	controller.hears('ただいま',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('ただいま', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message,'おかえりー:raised_hand_with_fingers_splayed::skin-tone-2:')
 	})
 
-	controller.hears('パルミジャーノ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('パルミジャーノ', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message,'*レッジャーノ!!*:spaghetti:')
 	})
 
-	controller.hears('ねずみ食べる',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('ねずみ食べる', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message,'僕…ねずみじゃないよ:fearful:')
 	})
 
-	controller.hears('！！',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('！！', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message,'！！')
 	})
 
-	controller.hears('誕生日おめでとう',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears('誕生日おめ', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		if(chimpkinDate_Y + chimpkinDate_M + chimpkinDate_D == chimpkin.birth.year + chimpkin.birth.month + chimpkin.birth.day) {
 			bot.reply(message, 'ありがとうー:risu:\n今年で' + chimpkinDate_Y - chimpkin.birth.year + '歳になったよー。')
 		}else {
@@ -189,18 +189,22 @@ module.exports = controller => {
 		}
 	})
 
-	controller.hears(['誕生日いつ', '誕生日って', '誕生日何'],['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears(['誕生日いつ', '誕生日って', '誕生日何'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message, chimpkin.birth.month + '月' + chimpkin.birth.day + '日だよ\nプレゼントくれるの？？:gift:' )
 	})
 
-	controller.hears(['何歳', 'いくつになったの', 'いくつになったん', '年齢は'],['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears(['何歳', 'いくつになったの', 'いくつになったん', '年齢は'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message, chimpkinDate_Y - chimpkin.birth.year + '歳:risu:')
+	})
+
+	controller.hears('卑怯', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+		bot.reply(message, '卑怯！！')
 	})
 
 //=========================================================
 // 会話の振り分け1つにしちゃう？
 //=========================================================
-// controller.hears('(.*)？',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+// controller.hears('(.*)？', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 // 	const pickMessage = message.match[1]
 // 	if(str.match('誕生日')) {
 

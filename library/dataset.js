@@ -40,6 +40,6 @@ module.exports = controller => {
 			year: '2017',
 			month: '06',
 			day: '25'
-		},
+		}
 	}
 }
