@@ -8,7 +8,7 @@ module.exports = controller => {
 
 	controller.hears('おみくじ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		if(message.user == maccoto.id) {
-			bot.reply(message, getRandom([
+			bot.reply(message, mtRandom([
 				'*大吉* 今日はダブルエリアルがよく来まるぜ:sunglasses:',
 				'*大吉* ' + getRandom(kichi.name) + 'が' + maccoto.name + 'に美味しいもの食べさせてくれるぜ！ :sunglasses:',
 				'*大吉* ' + maccoto.name + '、今日も最高だぜ:sunglasses:',
@@ -22,9 +22,9 @@ module.exports = controller => {
 				'*中吉* 常人の2倍運がいいんだぜ:sunglasses:',
 				'*中吉* 無くしたものも2倍になって帰ってくるぜ:sunglasses:',
 				'*小吉* 今日は対戦で勝ちまくれるぜ:sunglasses:',
-			]))
+			], chimpkinDate_Y + chimpkinDate_M + chimpkinDate_D))
 		}else {
-			bot.reply(message, getRandom([
+			bot.reply(message, mtRandom([
 				'*大吉* いい日になるよいいねー',
 				'*中吉* 今日は甘ーいものを食べるとよいよい',
 				'*中吉* まぁまぁな日もあるよねー',
@@ -43,7 +43,7 @@ module.exports = controller => {
 				'*末吉* ' + getRandom(kichi.name) + 'の末の姿。おばあちゃん。',
 				'*凶* :scream:',
 				'*欲* お肉が食べたくなーる。美味しいお肉が食べたくなーる。',
-			]))
+			], chimpkinDate_Y + chimpkinDate_M + chimpkinDate_D))
 		}
 	})
 
