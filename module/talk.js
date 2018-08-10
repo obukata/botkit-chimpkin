@@ -63,7 +63,7 @@ module.exports = controller => {
 		bot.reply(message, getRandom([
 			'後5分寝かせてー…',
 			'おはようー！:sunny:',
-			'今日の天気はどうでしょー。\n<@guinea> さん、天気教えて下さいー。',
+			// '今日の天気はどうでしょー。\n<@guinea> さん、天気教えて下さいー。',
 		]))
 	})
 
