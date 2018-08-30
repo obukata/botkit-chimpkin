@@ -25,6 +25,7 @@ module.exports = controller => {
 				'*小吉* 今日は対戦で勝ちまくれるぜ:sunglasses:',
 				'*吉* 対戦は止めた方がいいかも。トレーニングモードで精度を上げよー。',
 				'*吉* お腹はすくけど、ナッツ食べて頑張ろう！…少し分けてね:drooling_face:',
+				'*輪* 自転車乗らないと！乗らないとダメだよ！',
 			], chimpkinDate_Y + chimpkinDate_M + chimpkinDate_D))
 		}else {
 			bot.reply(message, mtRandom([
@@ -34,6 +35,7 @@ module.exports = controller => {
 				'*中吉* 芸術日和だよ！たまには本とか映画とか見てみるのもいいよー',
 				'*中吉* 今日は甘ーいものを食べるとよいよい',
 				'*中吉* まぁまぁな日もあるよねー',
+				'*中吉* 新しい趣味を作ってみよう！んーとね、オススメは' + getRandom(maccoto.hobby) + 'だよ。',
 				'*中吉* 料理上達デー！たまには料理を練習するのだ:male-cook::skin-tone-2:',
 				'*小吉* ちょっとくらいの幸せが心地いいもんだよねー',
 				'*小吉* ピリっとしたものを食べて元気出していきましょう！',
