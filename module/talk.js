@@ -202,6 +202,48 @@ module.exports = controller => {
 		bot.reply(message, '卑怯！！')
 	})
 
+	controller.hears(['USA', 'U.S.A', 'U S A', 'U・S・A'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+		bot.reply(message, getRandom([
+			'オールドムービー観たシネマ',
+			'リーゼントヘア真似した',
+			'FM 聴いてた渚',
+			'ツイスト踊ったフロア',
+			'ミラーボールに恋した',
+			'仲間の中古のオープンカー',
+			'あのこは髪なびかせた',
+		]))
+	})
+	controller.hears(['カーモンベイビ', 'カモンベイビ', 'かーもんべいび', 'かもんべいび'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+		bot.reply(message, getRandom([
+			'あめりか！'
+		]))
+	})
+	controller.hears(['ドリームの見方を'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+		bot.reply(message, getRandom([
+			'いんすぱいあ！'
+		]))
+	})
+	controller.hears(['交差するルーツ'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+		bot.reply(message, getRandom([
+			'たいむずすくえあ！'
+		]))
+	})
+	controller.hears(['競合してく'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+		bot.reply(message, getRandom([
+			'ジパングで！'
+		]))
+	})
+	controller.hears(['ニューウェーブ寄せる'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+		bot.reply(message, getRandom([
+			'うぇすとこーすと！'
+		]))
+	})
+	controller.hears(['ユナイテッドする'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+		bot.reply(message, getRandom([
+			'朝焼け！'
+		]))
+	})
+
 //=========================================================
 // 会話の振り分け1つにしちゃう？
 //=========================================================

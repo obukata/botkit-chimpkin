@@ -30,7 +30,7 @@ module.exports = controller => {
 		},
 		like: {
 			sanuki: {
-				dinner: ['日高屋', '木屋', '四季亭', '四季蕎麦', 'カリカ', '紅光', 'Grano', 'サガル', 'しちりん']
+				dinner: ['日高屋', '木屋', '四季蕎麦', 'カリカ', 'マクド', 'Grano', 'サガル']
 			}
 		}
 	}
