@@ -89,3 +89,10 @@ controller.hears('button', ['direct_message'],function(bot,message) {
 	};
 	bot.reply(message, reply);
 })
+
+controller.on('interactive_message_callback', function(bot, message) {
+	var users_answer = message.actions[0].name;
+	if (message.callback_id == "test_button") {
+		bot.replyInteractive(message, "あなたは「" + users_answer + "」を押しました");
+	}
+})
