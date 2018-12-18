@@ -64,3 +64,28 @@ Fs.readdir(modulePath, (err, list) => {
 		}
 	}
 })
+
+controller.hears('button', ['direct_message'],function(bot,message) {
+	var reply = {
+		"text": "ボタンのテストです。",
+		"attachments": [{
+			"text": "どれか押してください。",
+			"fallback": "失敗しました。",
+			"callback_id": "test_button",
+			"color": "#808080",
+			"actions": [
+				{
+					"type": "button",
+					"name": "test_button1",
+					"text": "テストボタン1"
+				},
+				{
+					"type": "button",
+					"name": "test_button2",
+					"text": "テストボタン2"
+				}
+			]
+		}]
+	};
+	bot.reply(message, reply);
+})
