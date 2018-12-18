@@ -5,7 +5,7 @@
   "main": "bot.js",
   "dependencies": {
     "async": "^2.6.1",
-    "botkit": "^0.5.4",
+    "botkit": "^0.7.0",
     "cron": "^1.2.1",
     "edit-google-spreadsheet": "^0.3.0",
     "fs": "0.0.1-security",
