@@ -7,13 +7,30 @@
 module.exports = controller => {
 
 	controller.hears('チンプキン', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-		bot.reply(message, getRandom([
-			'はーいー:hand::skin-tone-2:',
-			'何か呼んだ？:chipmunk:',
-			'私がチンプキンですよー:stuck_out_tongue_closed_eyes:',
-			'なーにー？',
-			'ほい'
-		]))
+		var reply = {
+			'text': 'はーいー',
+			'attachments': [{
+				'text': '何かご用？',
+				'fallback': ':thinking_face:？',
+				'callback_id': 'info',
+				'color': '#6c4317',
+				'actions': [
+					{
+						'type': 'button',
+						'name': 'info_orientalZodiac',
+						'text': '干支教えて'
+					}
+				]
+			}]
+		}
+		bot.reply(message, reply)
+		// bot.reply(message, getRandom([
+		// 	'はーいー:hand::skin-tone-2:',
+		// 	'何か呼んだ？:chipmunk:',
+		// 	'私がチンプキンですよー:stuck_out_tongue_closed_eyes:',
+		// 	'なーにー？',
+		// 	'ほい'
+		// ]))
 	})
 
 	controller.hears('お腹すいた', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
