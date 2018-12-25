@@ -1,1 +1,1 @@
-web: port=$PORT node bot.js
+web: port=$PORT node index.js
