@@ -26,46 +26,73 @@ Path = require('path')
 GoogleSpreadsheet = require('google-spreadsheet')
 async = require('async')
 
-if (!process.env.token) {
-	console.log('Error: Specify token in environment')
-	process.exit(1)
-}else if(!process.env.port) {
-	console.log('Error: Specify port in environment')
+// if (!process.env.token) {
+// 	console.log('Error: Specify token in environment')
+// 	process.exit(1)
+// }else if(!process.env.port) {
+// 	console.log('Error: Specify port in environment')
+// 	process.exit(1)
+// }
+if (!process.env.clientId || !process.env.clientSecret || !process.env.port) {
+	console.log('Error: Specify clientId clientSecret and port in environment')
 	process.exit(1)
 }
 
 controller = Botkit.slackbot({
-	debug: false,
-	json_file_store: 'storage_bot_db'
-}).configureSlackApp(
-	{
-		clientId: process.env.clientId,
-		clientSecret: process.env.clientSecret,
-		scopes: ['bot'],
-	}
-)
-
-controller.spawn({
-	token: process.env.token
-}).startRTM(function(err){
-	if (err) {
-		throw new Error(err)
-	}
+	// interactive_replies: true, // tells botkit to send button clicks into conversations
+	json_file_store: './storage_bot_db/',
+}).configureSlackApp({
+	clientId: process.env.clientId,
+	clientSecret: process.env.clientSecret,
+	scopes: ['bot'],
 })
 
 controller.setupWebserver(process.env.port,function(err,webserver) {
-	controller.createHomepageEndpoint(controller.webserver)
+	controller.createWebhookEndpoints(controller.webserver)
 	controller.createOauthEndpoints(controller.webserver,function(err,req,res) {
 		if (err) {
-			res.status(500).send('ERROR: ' + err);
-		} else {
+			res.status(500).send('ERROR: ' + err)
+		}else {
 			res.send('Success!')
 		}
 	})
-	controller.createWebhookEndpoints(controller.webserver)
 })
 
+// just a simple way to make sure we don't
+// connect to the RTM twice for the same team
+var _bots = {}
+function trackBot(bot) {
+	_bots[bot.config.token] = bot
+}
 
+controller.on('create_bot',function(bot,config) {
+	if (_bots[bot.config.token]) {
+	// already online! do nothing.
+	} else {
+		bot.startRTM(function(err) {
+			if (!err) {
+				trackBot(bot)
+			}
+			bot.startPrivateConversation({user: config.createdBy},function(err,convo) {
+				if (err) {
+					console.log(err)
+				} else {
+					convo.say('I am a bot that has just joined your team')
+					convo.say('You must now /invite me to a channel so that I can be of use!')
+				}
+			})
+		})
+	}
+})
+
+// Handle events related to the websocket connection to Slack
+controller.on('rtm_open',function(bot) {
+	console.log('** The RTM api just connected!')
+})
+controller.on('rtm_close',function(bot) {
+	console.log('** The RTM api just closed')
+	// you may want to attempt to re-open
+})
 
 const libraryPath = Path.resolve(__dirname, 'library')
 Fs.readdir(libraryPath, (err, list) => {
@@ -87,56 +114,37 @@ Fs.readdir(modulePath, (err, list) => {
 	}
 })
 
+
 controller.hears('button', ['direct_message'],function(bot,message) {
 	var reply = {
-		"text": "Would you like to play a game?",
-		"attachments": [
-			{
-				"text": "Choose a game to play",
-				"fallback": "You are unable to choose a game",
-				"callback_id": "wopr_game",
-				"color": "#3AA3E3",
-				"attachment_type": "default",
-				"actions": [
-					{
-						"name": "game",
-						"text": "Chess",
-						"type": "button",
-						"value": "chess"
-					},
-					{
-						"name": "game",
-						"text": "Falken's Maze",
-						"type": "button",
-						"value": "maze"
-					},
-					{
-						"name": "game",
-						"text": "Thermonuclear War",
-						"style": "danger",
-						"type": "button",
-						"value": "war",
-						"confirm": {
-							"title": "Are you sure?",
-							"text": "Wouldn't you prefer a good game of chess?",
-							"ok_text": "Yes",
-							"dismiss_text": "No"
-						}
-					}
-				]
-			}
-		]
+		"text": "ボタンのテストです。",
+		"attachments": [{
+			"text": "どれか押してください。",
+			"fallback": "失敗しました。",
+			"callback_id": "test_button",
+			"color": "#808080",
+			"actions": [
+				{
+					"type": "button",
+					"name": "test_button1",
+					"text": "テストボタン1"
+				},
+				{
+					"type": "button",
+					"name": "test_button2",
+					"text": "テストボタン2"
+				}
+			]
+		}]
 	}
-	bot.reply(message, reply);
+	bot.reply(message, reply)
 })
-controller.hears('ローカル？', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-	bot.reply(message, 'ローカライゼーション！')
-})
+
+
 controller.on('interactive_message_callback', function(bot, message) {
-	console.log('test')
-	bot.reply(message, 'ボタン押した！')
-	var users_answer = message.actions[0].name;
+	var users_answer = message.actions[0].name
 	if (message.callback_id == "test_button") {
-		bot.replyInteractive(message, "あなたは「" + users_answer + "」を押しました");
+		bot.replyInteractive(message, "あなたは「" + users_answer + "」を押しました")
 	}
 })
+
