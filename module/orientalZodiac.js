@@ -26,7 +26,7 @@ module.exports = controller => {
 		let zodiac = new Object()
 		zodiac.Name = zodiacList[chimpkinDate_Y % 12]
 		zodiac.Year = message.match[1]
-		bot.reply(message,'今年は *' + zodiac.Name + '* だよー。\n> 干支の順番：子・丑・寅・卯・辰・巳・午・未・申・酉・戌・亥')
+		return zodiac
 	}
 
 	function orientalZodiacYear(zodiacYear) {
@@ -38,6 +38,7 @@ module.exports = controller => {
 
 	controller.hears('干支教えて',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		orientalZodiac()
+		bot.reply(message,'今年は *' + zodiac.Name + '* だよー。\n> 干支の順番：子・丑・寅・卯・辰・巳・午・未・申・酉・戌・亥')
 	})
 	controller.hears('(.*)年の干支',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		orientalZodiacYear(message.match[1])
