@@ -94,25 +94,25 @@ controller.on('rtm_close',function(bot) {
 	// you may want to attempt to re-open
 })
 
-const libraryPath = Path.resolve(__dirname, 'library')
-Fs.readdir(libraryPath, (err, list) => {
-	for (const file of list) {
-		if(file.match('.js')) {
-			const pluginPath = Path.resolve(libraryPath, file)
-			require(pluginPath)(controller)
-		}
-	}
-})
+// const libraryPath = Path.resolve(__dirname, 'library')
+// Fs.readdir(libraryPath, (err, list) => {
+// 	for (const file of list) {
+// 		if(file.match('.js')) {
+// 			const pluginPath = Path.resolve(libraryPath, file)
+// 			require(pluginPath)(controller)
+// 		}
+// 	}
+// })
 
-const modulePath = Path.resolve(__dirname, 'module')
-Fs.readdir(modulePath, (err, list) => {
-	for (const file of list) {
-		if(file.match('.js')) {
-			const pluginPath = Path.resolve(modulePath, file)
-			require(pluginPath)(controller)
-		}
-	}
-})
+// const modulePath = Path.resolve(__dirname, 'module')
+// Fs.readdir(modulePath, (err, list) => {
+// 	for (const file of list) {
+// 		if(file.match('.js')) {
+// 			const pluginPath = Path.resolve(modulePath, file)
+// 			require(pluginPath)(controller)
+// 		}
+// 	}
+// })
 
 
 controller.hears('button', ['direct_message'],function(bot,message) {
