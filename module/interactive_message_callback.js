@@ -10,7 +10,7 @@ module.exports = controller => {
 		if (message.callback_id == 'info') {
 			data.bot = bot
 			data.message = message
-			buttonSend(data)
+			orientalZodiacNow(data)
 		}
 	})
 
