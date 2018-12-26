@@ -24,15 +24,10 @@ module.exports = controller => {
 						'name': 'info_paperFortune',
 						'text': 'おみくじ'
 					},
-					{
-						'type': 'button',
-						'name': 'info_horoscopes',
-						'text': '星座占い'
-					},
 					// {
 					// 	'type': 'button',
-					// 	'name': 'info_orientalZodiac',
-					// 	'text': '干支教えて'
+					// 	'name': 'info_horoscopes',
+					// 	'text': '星座占い'
 					// },
 				]
 			}]
