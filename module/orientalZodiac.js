@@ -43,11 +43,11 @@ module.exports = controller => {
 	//=========================================================
 	function orientalZodiacNow(data) {
 		const zodiacName = zodiac[chimpkinDate_Y % 12]
-		orientalZodiacView(data, zodiacName)
+		orientalZodiacNowView(data, zodiacName)
 	}
-	function orientalZodiacYear() {
+	function orientalZodiacYear(data) {
 		const zodiacYear = message.match[1]
-		const zodiacName = zodiac[message.match[1] % 12]
+		const zodiacName = zodiac[data.message.match[1] % 12]
 		orientalZodiacYearView(data, zodiacYear, zodiacName)
 	}
 
