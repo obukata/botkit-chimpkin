@@ -62,7 +62,7 @@ module.exports = controller => {
 				response.on('end', () => {
 					let current = JSON.parse(body)
 					let text =
-					':crown:' + current['horoscope'][auguryNowDate][auguryNum]['rank'] + '位：' + current['horoscope'][auguryNowDate][auguryNum]['sign'] + 'の今日の運勢\n' +
+					current['horoscope'][auguryNowDate][auguryNum]['sign'] + 'の今日の運勢\n' +
 					current['horoscope'][auguryNowDate][auguryNum]['content'] + '\n' +
 					'> :moneybag:金運　：' + asterismLuck[current['horoscope'][auguryNowDate][auguryNum]['money']] + '\n' +
 					'> :briefcase:仕事運：' + asterismLuck[current['horoscope'][auguryNowDate][auguryNum]['job']] + '\n' +
