@@ -47,6 +47,7 @@ module.exports = controller => {
 	// Model
 	//=========================================================
 	global.horoscopes = function(data, auguryNum) {
+		auguryNum = parseInt(auguryNum)
 		if(auguryNum == "none") {
 			horoscopesError(data)
 		}else {
