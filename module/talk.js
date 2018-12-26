@@ -8,9 +8,8 @@ module.exports = controller => {
 
 	controller.hears('チンプキン', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		var reply = {
-			'text': 'はーいー',
+			'text': '何かご用？',
 			'attachments': [{
-				'text': '何かご用？',
 				'fallback': ':thinking_face:？',
 				'callback_id': 'info',
 				'color': '#6c4317',
@@ -19,7 +18,22 @@ module.exports = controller => {
 						'type': 'button',
 						'name': 'info_orientalZodiac',
 						'text': '干支教えて'
-					}
+					},
+					{
+						'type': 'button',
+						'name': 'info_paperFortune',
+						'text': 'おみくじ'
+					},
+					// {
+					// 	'type': 'button',
+					// 	'name': 'info_orientalZodiac',
+					// 	'text': '干支教えて'
+					// },
+					// {
+					// 	'type': 'button',
+					// 	'name': 'info_orientalZodiac',
+					// 	'text': '干支教えて'
+					// },
 				]
 			}]
 		}

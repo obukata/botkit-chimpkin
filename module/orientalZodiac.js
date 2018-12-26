@@ -42,9 +42,6 @@ module.exports = controller => {
 	// Model
 	//=========================================================
 	global.orientalZodiacNow = function(data) {
-		data.bot.reply(data.message, '押したよ！ in Zodiac Model')
-		data.bot.reply(data.message, '押したよ！' + zodiac[0] + 'zodiac[0]')
-		data.bot.reply(data.message, '押したよ！' + chimpkinDate_Y + 'chimpkinDate_Y')
 		const zodiacName = zodiac[chimpkinDate_Y % 12]
 		orientalZodiacNowView(data, zodiacName)
 	}
@@ -58,7 +55,6 @@ module.exports = controller => {
 	// View
 	//=========================================================
 	global.orientalZodiacNowView = function(data, zodiacName) {
-		data.bot.reply(data.message, '押したよ！ in Zodiac View')
 		data.bot.reply(data.message,'今年は *' + zodiacName + '* だよー。\n> 干支の順番：子・丑・寅・卯・辰・巳・午・未・申・酉・戌・亥')
 	}
 	global.orientalZodiacYearView = function(data, zodiacYear, zodiacName) {
