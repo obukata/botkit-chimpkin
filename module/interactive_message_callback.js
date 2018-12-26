@@ -13,11 +13,9 @@ module.exports = controller => {
 			if(message.actions.name == 'info_orientalZodiac') {
 				orientalZodiacNow(data)
 			}else if(message.actions.name == 'info_paperFortune') {
-				if(message.user == maccoto.id) {
-					paperFortuneMaccoto(data)
-				}else {
-					paperFortuneKichi(data)
-				}
+				console.log(message)
+				paperFortuneMaccoto(data)
+				paperFortuneKichi(data)
 			}
 		}
 	})
