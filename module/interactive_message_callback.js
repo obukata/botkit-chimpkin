@@ -12,10 +12,12 @@ module.exports = controller => {
 		if (message.callback_id == 'info') {
 			if(message.actions.name == 'info_orientalZodiac') {
 				orientalZodiacNow(data)
-			}else if(message.actions.name == 'info_paperFortune') {
-				console.log(message)
-				paperFortuneMaccoto(data)
-				paperFortuneKichi(data)
+			}else if(message.actions[0].name == 'info_paperFortune') {
+				if(message.user == maccoto.id) {
+					paperFortuneMaccoto(data)
+				}else {
+					paperFortuneKichi(data)
+				}
 			}
 		}
 	})
