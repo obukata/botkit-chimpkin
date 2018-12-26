@@ -38,7 +38,8 @@ module.exports = controller => {
 	controller.hears(['(.*)の運勢'],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
 		data.bot = bot
 		data.message = message
-		horoscopes(data)
+		augurySign = null
+		horoscopes(data, augurySign)
 	})
 
 
