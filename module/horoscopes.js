@@ -38,18 +38,15 @@ module.exports = controller => {
 	controller.hears(['(.*)の運勢'],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
 		data.bot = bot
 		data.message = message
-		augurySign = null
-		horoscopes(data, augurySign)
+		const augurySign = message.match[1]
+		const auguryNum = asterism[augurySign]
+		horoscopes(data, auguryNum)
 	})
 
 
 	// Model
 	//=========================================================
-	global.horoscopes = function(data, augurySign) {
-		if(!augurySign) {
-			const augurySign = data.message.match[1]
-		}
-		const auguryNum = asterism[augurySign]
+	global.horoscopes = function(data, auguryNum) {
 		if(auguryNum == "none") {
 			horoscopesError(data)
 		}else {
