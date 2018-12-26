@@ -47,7 +47,7 @@ module.exports = controller => {
 					}]
 				})
 			}else if(message.actions[0].name == 'horoscopes_list') {
-				const auguryNum = message.actions[0].options[0].value[0]
+				const auguryNum = message.actions[0].selected_options.value
 				horoscopes(data, auguryNum)
 			}
 		}
