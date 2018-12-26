@@ -8,8 +8,9 @@ module.exports = controller => {
 
 	controller.on('interactive_message_callback', function(bot, message) {
 		if (message.callback_id == 'info') {
-			bot.reply(message, '押したよ')
-			orientalZodiac()
+			data.bot = bot
+			data.message = message
+			orientalZodiacNow(data)
 		}
 	})
 
