@@ -10,6 +10,8 @@ module.exports = controller => {
 	// Controller
 	//=========================================================
 	controller.hears('おみくじ',['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+		data.bot = bot
+		data.message = message
 		if(message.user == maccoto.id) {
 			paperFortuneMaccoto(data)
 		}else {
