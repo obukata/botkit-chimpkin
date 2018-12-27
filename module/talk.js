@@ -42,7 +42,7 @@ module.exports = controller => {
 		// ]))
 	})
 
-	controller.hears('お腹すいた', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+	controller.hears(['お腹すいた', 'はらへった', 'ぺこぺこ', 'おなかへった'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		if(message.user == maccoto.id) {
 			bot.reply(message, getRandom([
 				maccoto.name + '食べる？:apple:',
