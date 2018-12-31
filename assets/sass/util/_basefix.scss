@@ -1,0 +1,29 @@
+// Base Fix
+
+//* ==================================================
+//	Reset
+//================================================== */
+
+img {
+	vertical-align: bottom;
+}
+input,
+select,
+textarea {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	border: none;
+	border-radius: 0;
+	outline:none;
+	background: none;
+}
+
+
+
+//* ==================================================
+//	Css Helper
+//================================================== */
+
+.unactive{
+	pointer-events: none;
+}

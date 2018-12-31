@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<title>Aside</title>
+<!-- GA==================================================== -->
+
+<!-- Styles============================================ -->
+<link href="https://fonts.googleapis.com/css?family=Raleway:100,300,500,700,900|Noto+Sans+JP:100,300,500,700,900" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles/core.css">
+
+<!-- Scripts=========================================== -->
+<script src="/assets/scripts/bundle.js"></script>
+
+</head>
+<body>
+
+<div id="app" class="page-wrap" v-bind:class="spnav.class">
+	<header class="header">
+		<div class="header-close"><a v-on:click="navigation" class="style--font-en style--font-light style--text-small" href="javascript:void(0)">$ Close</a></div>
+		<div class="header-body">
+			<p class="header-logo style--font-en style--font-bold"><router-link to="/">Vue Lab.</router-link></p>
+			<p class="header-logo-text">webpackを用いた、<br>いい感じSPA実装テスト</p>
+		</div>
+		<div class="header-body">
+			<nav class="header-nav">
+				<ul class="header-nav-list style--font-en style--font-bold">
+					<li class="header-nav-item"><router-link to="/">top</router-link></li>
+					<li class="header-nav-item"><router-link to="/about">about</router-link></li>
+					<li class="header-nav-item"><router-link to="/contact">contact</router-link></li>
+				</ul>
+			</nav>
+		</div>
+		<footer class="footer">
+			<div class="header-body">
+				<small class="style--font-en style--font-bold">©︎ 2018 obukata</small>
+			</div>
+		</footer>
+	</header>
+
+	<main class="main">
+		<div class="header-sp">
+			<span class="header-sp-icon"><a v-on:click="navigation" href="javascript:void(0)"><span></span></a></span>
+			<span class="header-sp-logo style--font-en style--font-bold"><router-link to="/">Vue Lab.</router-link></span>
+		</div>
+
+		<transition name="fade" mode="out-in">
+			<router-view></router-view>
+		</transition>
+	</main>
+
+</div>
+
+</body>
+</html>
