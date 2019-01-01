@@ -1,1 +1,1 @@
-web: server public port=$PORT node index.js
+web: serve public --auth
