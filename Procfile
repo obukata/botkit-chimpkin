@@ -1,1 +1,1 @@
-web: serve public --auth
+web: serve public
