@@ -40,7 +40,7 @@ if (!process.env.clientId || !process.env.clientSecret || !process.env.port) {
 
 controller = Botkit.slackbot({
 	// interactive_replies: true, // tells botkit to send button clicks into conversations
-	json_file_store: './storage_bot_db/',
+	// json_file_store: './storage_bot_db/',
 }).configureSlackApp({
 	clientId: process.env.clientId,
 	clientSecret: process.env.clientSecret,
@@ -84,31 +84,31 @@ controller.on('create_bot',function(bot,config) {
 	}
 })
 
-// // Handle events related to the websocket connection to Slack
-// controller.on('rtm_open',function(bot) {
-// 	console.log('** The RTM api just connected!')
-// })
-// controller.on('rtm_close',function(bot) {
-// 	console.log('** The RTM api just closed')
-// 	// you may want to attempt to re-open
-// })
+// Handle events related to the websocket connection to Slack
+controller.on('rtm_open',function(bot) {
+	console.log('** The RTM api just connected!')
+})
+controller.on('rtm_close',function(bot) {
+	console.log('** The RTM api just closed')
+	// you may want to attempt to re-open
+})
 
-// const libraryPath = Path.resolve(__dirname, 'library')
-// Fs.readdir(libraryPath, (err, list) => {
-// 	for (const file of list) {
-// 		if(file.match('.js')) {
-// 			const pluginPath = Path.resolve(libraryPath, file)
-// 			require(pluginPath)(controller)
-// 		}
-// 	}
-// })
+const libraryPath = Path.resolve(__dirname, 'library')
+Fs.readdir(libraryPath, (err, list) => {
+	for (const file of list) {
+		if(file.match('.js')) {
+			const pluginPath = Path.resolve(libraryPath, file)
+			require(pluginPath)(controller)
+		}
+	}
+})
 
-// const modulePath = Path.resolve(__dirname, 'module')
-// Fs.readdir(modulePath, (err, list) => {
-// 	for (const file of list) {
-// 		if(file.match('.js')) {
-// 			const pluginPath = Path.resolve(modulePath, file)
-// 			require(pluginPath)(controller)
-// 		}
-// 	}
-// })
+const modulePath = Path.resolve(__dirname, 'module')
+Fs.readdir(modulePath, (err, list) => {
+	for (const file of list) {
+		if(file.match('.js')) {
+			const pluginPath = Path.resolve(modulePath, file)
+			require(pluginPath)(controller)
+		}
+	}
+})

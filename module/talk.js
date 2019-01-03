@@ -240,34 +240,25 @@ module.exports = controller => {
 		]))
 	})
 	controller.hears(['カーモンベイビ', 'カモンベイビ', 'かーもんべいび', 'かもんべいび'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-		bot.reply(message, getRandom([
-			'あめりか！'
-		]))
+		bot.reply(message, 'あめりか！')
 	})
 	controller.hears(['ドリームの見方を'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-		bot.reply(message, getRandom([
-			'いんすぱいあ！'
-		]))
+		bot.reply(message, 'いんすぱいあ！')
 	})
 	controller.hears(['交差するルーツ'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-		bot.reply(message, getRandom([
-			'たいむずすくえあ！'
-		]))
+		bot.reply(message, 'たいむずすくえあ！')
 	})
 	controller.hears(['競合してく'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-		bot.reply(message, getRandom([
-			'ジパングで！'
-		]))
+		bot.reply(message, 'ジパングで！')
 	})
 	controller.hears(['ニューウェーブ寄せる'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-		bot.reply(message, getRandom([
-			'うぇすとこーすと！'
-		]))
+		bot.reply(message, 'うぇすとこーすと！')
 	})
 	controller.hears(['ユナイテッドする'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-		bot.reply(message, getRandom([
-			'朝焼け！'
-		]))
+		bot.reply(message, '朝焼け！')
+	})
+	controller.hears(['あけおめ', '明けおめ', 'あけましておめでとう', '明けましておめでとう', 'アケオメ'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+		bot.reply(message, '明けましておめでとうございます！\n今年もいっぱい頑張るからよろしくね！')
 	})
 
 //=========================================================
