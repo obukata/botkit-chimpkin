@@ -63,7 +63,6 @@ module.exports = controller => {
 		bot.reply(message, getRandom([
 			'後5分寝かせてー…',
 			'おはようー！:sunny:',
-			// '今日の天気はどうでしょー。\n<@guinea> さん、天気教えて下さいー。',
 		]))
 	})
 
@@ -115,10 +114,8 @@ module.exports = controller => {
 
 	controller.hears('柏', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message, getRandom([
-			// '田舎の事？:thinking_face:',
 			'わーしか！',
-			// 'ベイブ都会へ行く'
-			'たまには何か食べるヨロシ\nhttps://tabelog.com/chiba/A1203/A120301/R2359/rstLst/?SrtT=rt&Srt=D&sort_mode=1'
+			'たまには何か食べるヨロシ\nhttps://tabelog.com/chiba/A1203/A120301/R2359/rstLst/?SrtT=rt&Srt=D&sort_mode=1',
 		]))
 	})
 
@@ -242,6 +239,9 @@ module.exports = controller => {
 		bot.reply(message, getRandom([
 			'朝焼け！'
 		]))
+	})
+	controller.hears(['エイエイ', 'えいえい', 'えい！えい！', 'エイ！エイ！'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+		bot.reply(message, 'おーーー！')
 	})
 
 //=========================================================
