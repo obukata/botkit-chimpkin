@@ -97,7 +97,9 @@ module.exports = controller => {
 				'P(xn+1=en+1|x0=e0,x1=e1,…,xn=en)=P(xn+1=en+1|xn=en)',
 				'pijpji=rjri⟺qijα(i→j)qjiα(j→i)=rjri⟺α(i→j)α(j→i)=rjqjiriqij',
 				'limN→∞P(min(f(x1),f(x2),…,f(xN))=f(x∗))=1',
-				'∑i∈Xripij=rj∑i∈Xpji=rj'
+				'∑i∈Xripij=rj∑i∈Xpji=rj',
+				':video_game::chipmunk: ……',
+				':butterfly:ミ　:chipmunk: :dash:',
 			]))
 			setTimeout(function() {
 				bot.reply(message, getRandom([
@@ -106,7 +108,9 @@ module.exports = controller => {
 					'悪くはないよ。',
 					'いいね！',
 					'そうだね。',
-					'...Zzz'
+					'...Zzz',
+					'それは、違うと思うよ。',
+					'…え？',
 				]))
 			}, 1000)
 		}, 5000)
