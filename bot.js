@@ -25,6 +25,7 @@ Fs = require('fs')
 Path = require('path')
 GoogleSpreadsheet = require('google-spreadsheet')
 async = require('async')
+CronJob = require('cron').CronJob
 
 if (!process.env.token) {
 	console.log('Error: Specify token in environment')
