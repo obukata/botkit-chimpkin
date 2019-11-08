@@ -34,9 +34,6 @@ module.exports = controller => {
 			]))
 		}
 	})
-	controller.hears('ねねねね', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
-		bot.reply(message, 'randomDogImage()')
-	})
 
 	controller.hears('佐貫で食べ', ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		if(message.user == maccoto.id) {
