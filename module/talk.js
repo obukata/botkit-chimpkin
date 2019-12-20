@@ -247,6 +247,11 @@ module.exports = controller => {
 	controller.hears(['エイエイ', 'えいえい', 'えい！えい！', 'エイ！エイ！'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
 		bot.reply(message, 'おーーー！')
 	})
+	controller.hears(['アレクサ', 'Alexa', 'ALEXA', 'alexa', 'あれくさ'], ['direct_message','direct_mention','mention','ambient'],function(bot,message) {
+		bot.reply(message, getRandom([
+			':face_with_raised_eyebrow:',
+		]))
+	})
 
 //=========================================================
 // 会話の振り分け1つにしちゃう？
