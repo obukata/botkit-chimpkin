@@ -94,10 +94,9 @@ module.exports = controller => {
 			bot.reply(message, getRandom([
 				'I=∫Xh(x)r(x)dx=Er[h(x)]',
 				'I=∫Xh(x)r(x)q(x)q(x)dx=Eq[h(x)r(x)q(x)]',
-				'P(xn+1=en+1|x0=e0,x1=e1,…,xn=en)=P(xn+1=en+1|xn=en)',
-				'pijpji=rjri⟺qijα(i→j)qjiα(j→i)=rjri⟺α(i→j)α(j→i)=rjqjiriqij',
-				'limN→∞P(min(f(x1),f(x2),…,f(xN))=f(x∗))=1',
-				'∑i∈Xripij=rj∑i∈Xpji=rj',
+				'radian = radius * Math.PI / 180',
+				'Math.sin(radius * Math.PI / 180)',
+				'Math.cos(radius * Math.PI / 180)',
 				':video_game::chipmunk: ……',
 				':butterfly:ミ　:chipmunk: :dash:',
 			]))
